@@ -1,0 +1,31 @@
+#pragma once
+
+#include <string>
+
+#ifdef _WIN32
+#include <SDL/SDL.h> /* Windows-specific SDL2 library */
+#else
+#include <SDL.h> /* macOS- and GNU/Linux-specific */
+#endif
+
+using namespace std;
+
+class Window {
+	public:
+		Window(const string &title, int width, int height);
+		~Window();
+
+		inline bool isClosed() const { return _closed; };
+
+		void pollEvents();
+
+	private:
+		bool init();
+
+		const string _title;
+		const int _width;
+		const int _height;
+		
+		bool _closed = false;
+		SDL_Window *_window = nullptr;
+};
