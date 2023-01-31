@@ -24,12 +24,17 @@ bool Window::init() {
 									 this->_height,
 									 SDL_WINDOW_RESIZABLE
 									);
-
 	if (!this->_window) {
 		cerr << "Failed to create window\n";
 		return false;
 	}
 
+	this->_renderer = SDL_CreateRenderer(this->_window, nullptr,
+										 SDL_RENDERER_ACCELERATED);
+	if (!this->_renderer) {
+		cerr << "Failed to create renderer\n";
+		return false;
+	}
 	return true;
 }
 
@@ -45,4 +50,13 @@ void Window::pollEvents() {
 			break;
 		}
 	}
+}
+
+void Window::prepareScene() {
+	SDL_SetRenderDrawColor(this->_renderer, 0, 0, 0, 255);
+	SDL_RenderClear(this->_renderer);
+}
+
+void Window::presentScene() {
+	SDL_RenderPresent(this->_renderer);
 }

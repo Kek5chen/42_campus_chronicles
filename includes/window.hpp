@@ -18,6 +18,8 @@ class Window {
 		inline bool isClosed() const { return _closed; };
 
 		void pollEvents();
+		void prepareScene();
+		void presentScene();
 
 	private:
 		bool init();
@@ -28,4 +30,5 @@ class Window {
 		
 		bool _closed = false;
 		SDL_Window *_window = nullptr;
+		SDL_Renderer *_renderer = nullptr;
 };
