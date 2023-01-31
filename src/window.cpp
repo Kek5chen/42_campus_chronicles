@@ -1,7 +1,8 @@
 #include "window.hpp"
 #include <iostream>
+#include <utility>
 
-Window::Window(const string &title, int width, int height) : _title(title), _width(width), _height(height) {
+Window::Window(string title, int width, int height) : _title(std::move(title)), _width(width), _height(height) {
 	if (!init())
 		this->_closed = true;
 }

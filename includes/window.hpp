@@ -12,7 +12,7 @@ using namespace std;
 
 class Window {
 	public:
-		Window(const string &title, int width, int height);
+		Window(string title, int width, int height);
 		~Window();
 
 		inline bool isClosed() const { return _closed; };
