@@ -5,8 +5,6 @@
 
 using namespace std;
 
-#define DELAY (1000 / 60)
-
 class Game : public Window {
 
 	public:

@@ -1,6 +1,6 @@
 #include "game.hpp"
 
-Game::Game(): Window("42 Campus Chronicles", 800, 600){}
+Game::Game(): Window(TITLE, WINDOW_WIDTH,WINDOW_HEIGHT){}
 
 void Game::loop() {
 	while (!this->isClosed()) {
@@ -8,6 +8,5 @@ void Game::loop() {
 		this->pollEvents();
 		this->drawScene();
 		this->presentScene();
-		// SDL_Delay(DELAY);
 	}
 }
