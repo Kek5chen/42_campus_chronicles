@@ -58,6 +58,9 @@ void Window::prepareScene() {
 	SDL_RenderClear(this->_renderer);
 }
 
+void Window::drawScene() {
+}
+
 void Window::presentScene() {
 	SDL_RenderPresent(this->_renderer);
 }

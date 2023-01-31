@@ -14,6 +14,7 @@ int main (int argc, char **argv)
 	while (!win.isClosed()) {
 		win.prepareScene();
 		win.pollEvents();
+		win.drawScene();
 		win.presentScene();
 		SDL_Delay(DELAY);
 	}

@@ -19,6 +19,7 @@ class Window {
 
 		void pollEvents();
 		void prepareScene();
+		void drawScene();
 		void presentScene();
 
 	private:
