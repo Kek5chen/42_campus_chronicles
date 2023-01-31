@@ -36,6 +36,8 @@ bool Window::init() {
 		cerr << "Failed to create renderer\n";
 		return false;
 	}
+
+	SDL_SetRenderVSync(_renderer, 1);
 	return true;
 }
 

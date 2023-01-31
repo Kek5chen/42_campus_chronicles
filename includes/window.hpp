@@ -1,12 +1,13 @@
 #pragma once
 
+#include "includes.hpp"
 #include <string>
 
-#ifdef _WIN32
-#include <SDL/SDL.h> /* Windows-specific SDL2 library */
-#else
-#include <SDL.h> /* macOS- and GNU/Linux-specific */
-#endif
+// #ifdef _WIN32
+// #include <SDL/SDL.h> /* Windows-specific SDL2 library */
+// #else
+// #include <SDL.h> /* macOS- and GNU/Linux-specific */
+// #endif
 
 using namespace std;
 

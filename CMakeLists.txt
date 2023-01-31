@@ -14,7 +14,7 @@ else()
 endif()
 
 # Create your game executable target as usual 
-add_executable(42CC src/main.cpp src/window.cpp)
+add_executable(42CC src/main.cpp src/window.cpp src/game.cpp)
 
 # Link to the actual SDL3 library. SDL3::SDL3 is the shared SDL library, SDL3::SDL3-static is the static SDL libarary.
 target_link_libraries(42CC PRIVATE SDL3::SDL3)
