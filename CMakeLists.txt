@@ -8,15 +8,17 @@ option(42CC_VENDORED "Use vendored libraries" ON)
 
 if(42CC_VENDORED)
 	add_subdirectory(dependencies/SDL EXCLUDE_FROM_ALL)
+	add_subdirectory(dependencies/SDL_image EXCLUDE_FROM_ALL)
 else()
 	# 1. Look for a SDL3 package, 2. look for the SDL3 component and 3. fail if none can be found
 	find_package(SDL3 REQUIRED CONFIG REQUIRED COMPONENTS SDL3)
+	find_package(SDL3_image REQUIRED CONFIG REQUIRED COMPONENTS SDL3_image)
 endif()
 
 # Create your game executable target as usual 
 add_executable(42CC src/main.cpp src/window.cpp src/game.cpp)
 
 # Link to the actual SDL3 library. SDL3::SDL3 is the shared SDL library, SDL3::SDL3-static is the static SDL libarary.
-target_link_libraries(42CC PRIVATE SDL3::SDL3)
+target_link_libraries(42CC PRIVATE SDL3::SDL3 SDL3_image)
 
 target_include_directories(42CC PRIVATE includes)
