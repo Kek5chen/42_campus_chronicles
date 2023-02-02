@@ -5,7 +5,9 @@
 #define WINDOW_HEIGHT 600
 
 #ifdef _WIN32
-#include <SDL/SDL.h> /* Windows-specific SDL2 library */
+# include <SDL3/SDL.h>
+# include <SDL3/SDL_image.h>
 #else
-#include <SDL.h> /* macOS- and GNU/Linux-specific */
+# include <SDL.h>
+# include <SDL_image.h>
 #endif
