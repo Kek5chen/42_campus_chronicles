@@ -2,11 +2,15 @@ cmake_minimum_required(VERSION 3.0)
 project(42CC LANGUAGES C CXX OBJC OBJCXX)
 set (CMAKE_CXX_STANDARD 20)
 
+# Set the default build type to Debug if none is specified
+if (NOT CMAKE_BUILD_TYPE)
+	set(CMAKE_BUILD_TYPE Debug)
+endif()
 # Create an option to switch between a system sdl library and a vendored sdl library
 option(42CC_VENDORED "Use vendored libraries" ON)
 # No shared libs as we only static build
 set(BUILD_SHARED_LIBS OFF)
-set(OUT_DIR "${CMAKE_BINARY_DIR}/Debug") # TODO: For some reason the CMAKE_BUILD_TYPE is not set at all
+set(OUT_DIR "${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}")
 
 # add the SDL2 and SDL2_image libraries to the project if the 42CC_VENDORED option is set to ON
 # otherwise, look for the SDL2 and SDL2_image libraries and fail if they can't be found
