@@ -5,6 +5,7 @@ set (CMAKE_CXX_STANDARD 20)
 # Create an option to switch between a system sdl library and a vendored sdl library
 option(42CC_VENDORED "Use vendored libraries" ON)
 set(BUILD_SHARED_LIBS OFF)
+set(OUT_DIR "${CMAKE_BINARY_DIR}/Debug") # TODO: For some reason the CMAKE_BUILD_TYPE is not set at all
 
 if(42CC_VENDORED)
 	add_subdirectory(dependencies/SDL EXCLUDE_FROM_ALL)
@@ -15,8 +16,20 @@ else()
 	find_package(SDL3_image REQUIRED CONFIG REQUIRED COMPONENTS SDL3_image)
 endif()
 
-# Create your game executable target as usual 
-add_executable(42CC src/main.cpp src/window.cpp src/game.cpp)
+# Build the resource compiler in build-tools/42cc_resource_compiler.cpp into build-tools/42cc_resource_compiler
+# and use it to compile the resources into a .42CC file
+add_executable(42cc_resource_compiler build-tools/42cc_resource_compiler.cpp)
+add_custom_command(
+		OUTPUT ${OUT_DIR}/resources.42CC
+		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+		COMMAND ${OUT_DIR}/42cc_resource_compiler assets/img.png ${OUT_DIR}/resources.42CC
+		DEPENDS 42cc_resource_compiler
+		COMMENT "Compiling resources"
+		VERBATIM
+)
+
+# Create game executable
+add_executable(42CC src/main.cpp src/window.cpp src/game.cpp ${OUT_DIR}/resources.42CC src/resources.cpp)
 
 include_directories(dependencies/SDL_image/include)
 # Link to the actual SDL3 library. SDL3::SDL3 is the shared SDL library, SDL3::SDL3-static is the static SDL library.
