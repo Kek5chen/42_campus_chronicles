@@ -25,11 +25,12 @@ endif()
 
 # Build the resource compiler in build-tools/42cc_resource_compiler.cpp into build-tools/42cc_resource_compiler
 # and use it to compile the resources into a .42CC file
+set(ASSETS assets/duck.png assets/banana.png)
 add_executable(42cc_resource_compiler build-tools/42cc_resource_compiler.cpp)
 add_custom_command(
 		OUTPUT ${OUT_DIR}/resources.42CC
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-		COMMAND ${OUT_DIR}/42cc_resource_compiler assets/img.png ${OUT_DIR}/resources.42CC
+		COMMAND ${OUT_DIR}/42cc_resource_compiler ${ASSETS} ${OUT_DIR}/resources.42CC
 		DEPENDS 42cc_resource_compiler
 		COMMENT "Compiling resources"
 		VERBATIM

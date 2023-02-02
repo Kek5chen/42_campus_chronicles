@@ -46,21 +46,27 @@ int	main(int argc, char **argv)
 {
 	std::vector<char>	infileData;
 	std::streamsize		fileSize;
+	int 				i;
 
-	if (argc != 3) {
+	if (argc < 3) {
 		printf("Usage: %s <infile> <resfile>\n", argv[0]);
 		return 1;
 	}
-	printf("Input: %s\nOutput: %s\n", argv[1], argv[2]);
-	fileSize = read_infile(argv[1], infileData);
-	if (fileSize < 0) {
-		printf("Error: Could not open input file %s\n", argv[1]);
-		return 1;
-	}
-	fileSize = append_to_outfile(argv[2], fileSize, argv[1], infileData);
-	if (fileSize < 0) {
-		printf("Error: Could not open output file %s\n", argv[2]);
-		return 1;
+	i = 1;
+	while (i < argc - 1) {
+		printf("Input: %s\nOutput: %s\n", argv[i], argv[argc - 1]);
+		fileSize = read_infile(argv[i], infileData);
+		if (fileSize < 0) {
+			printf("Error: Could not open input file %s\n", argv[i]);
+			return 1;
+		}
+		fileSize = append_to_outfile(argv[argc - 1], fileSize, argv[i], infileData);
+		if (fileSize < 0) {
+			printf("Error: Could not open output file %s\n", argv[argc - 1]);
+			return 1;
+		}
+		infileData.clear();
+		i++;
 	}
 	return 0;
 }
