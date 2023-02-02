@@ -21,6 +21,7 @@ class Window {
 		void			prepare_scene();
 		virtual void	draw_scene();
 		void			present_scene();
+		SDL_Renderer	*get_renderer() const;
 
 	private:
 		bool init();

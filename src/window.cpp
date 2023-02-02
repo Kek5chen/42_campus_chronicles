@@ -67,3 +67,8 @@ void Window::draw_scene() {}
 void Window::present_scene() {
 	SDL_RenderPresent(this->_renderer);
 }
+
+SDL_Renderer* Window::get_renderer() const
+{
+	return this->_renderer;
+}
