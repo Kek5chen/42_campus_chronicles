@@ -2,14 +2,15 @@
 
 #include "includes.hpp"
 #include "window.hpp"
+#include "resources.hpp"
 
-using namespace std;
+extern ResourceLoader *resource_loader;
 
 class Game : public Window {
 
 	public:
 		Game();
-		~Game(){};
+		~Game() {};
 
 		void loop();
 

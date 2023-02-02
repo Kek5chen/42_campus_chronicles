@@ -1,6 +1,7 @@
 #pragma once
 
 #include "includes.hpp"
+#include "resources.hpp"
 #include <string>
 
 // #ifdef _WIN32
@@ -9,11 +10,9 @@
 // #include <SDL.h> /* macOS- and GNU/Linux-specific */
 // #endif
 
-using namespace std;
-
 class Window {
 	public:
-		Window(string title, int width, int height);
+		Window(std::string title, int width, int height);
 		~Window();
 
 		inline bool isClosed() const { return _closed; };
@@ -26,7 +25,7 @@ class Window {
 	private:
 		bool init();
 
-		const string _title;
+		const std::string _title;
 		const int _width;
 		const int _height;
 		

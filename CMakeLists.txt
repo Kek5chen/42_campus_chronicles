@@ -32,7 +32,8 @@ add_custom_command(
 )
 
 # Create game executable
-add_executable(42CC src/main.cpp src/window.cpp src/game.cpp ${OUT_DIR}/resources.42CC src/resources.cpp)
+add_executable(42CC ${OUT_DIR}/resources.42CC
+		src/main.cpp src/window.cpp src/game.cpp src/resources.cpp)
 
 include_directories(dependencies/SDL_image/include)
 # Link to the static SDL3 library SDL3::SDL3-static.

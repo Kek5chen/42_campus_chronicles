@@ -28,7 +28,7 @@ int append_to_outfile(const std::string& filename,
 					  const std::string &path,
 					  const std::vector<char> &data)
 {
-	std::ofstream	outfile(filename, std::ios::app);
+	std::ofstream	outfile(filename, std::ios::app | std::ios::binary);
 
 	if(!outfile.is_open())
 		return -1;

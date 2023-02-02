@@ -2,9 +2,14 @@
 #include <iostream>
 #include <utility>
 
-Window::Window(string title, int width, int height) : _title(std::move(title)), _width(width), _height(height) {
+static ResourceLoader *resource_loader;
+
+Window::Window(std::string title, int width, int height) : _title(std::move(title)), _width(width), _height(height) {
 	if (!init())
 		this->_closed = true;
+
+	resource_loader = new ResourceLoader();
+	resource_loader->load_resource_definitions("resources.42CC");
 }
 
 Window::~Window() {
@@ -14,7 +19,7 @@ Window::~Window() {
 
 bool Window::init() {
 	if (SDL_Init(SDL_INIT_VIDEO)) {
-		cerr << "Failed to initialize SDL\n";
+		std::cerr << "Failed to initialize SDL\n";
 		return false;
 	}
 
@@ -26,14 +31,14 @@ bool Window::init() {
 									 SDL_WINDOW_RESIZABLE
 									);
 	if (!this->_window) {
-		cerr << "Failed to create window\n";
+		std::cerr << "Failed to create window\n";
 		return false;
 	}
 
 	this->_renderer = SDL_CreateRenderer(this->_window, nullptr,
 										 SDL_RENDERER_ACCELERATED);
 	if (!this->_renderer) {
-		cerr << "Failed to create renderer\n";
+		std::cerr << "Failed to create renderer\n";
 		return false;
 	}
 
@@ -61,6 +66,15 @@ void Window::prepareScene() {
 }
 
 void Window::drawScene() {
+	SDL_Surface* surface = resource_loader->get_texture("assets/img.png");
+	if (surface == nullptr) {
+		std::cerr << "Failed to load texture\n";
+		return;
+	}
+	SDL_Texture* texture = SDL_CreateTextureFromSurface(this->_renderer, surface);
+	SDL_DestroySurface(surface);
+	SDL_RenderTexture(this->_renderer, texture, nullptr, nullptr);
+	SDL_DestroyTexture(texture);
 }
 
 void Window::presentScene() {
