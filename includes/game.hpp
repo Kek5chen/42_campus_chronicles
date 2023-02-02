@@ -3,17 +3,21 @@
 #include "includes.hpp"
 #include "window.hpp"
 #include "resources.hpp"
+#include "objects.hpp"
+
+extern	ResourceLoader	*resource_loader;
 
 class Game : public Window {
+public:
+	Game();
+	~Game() = default;
 
-	public:
-		Game();
-		~Game() = default;;
+	void	draw_scene() override;
+	void 	add_object(Object *object);
+	void	loop();
 
-		void draw_scene() override;
-		void loop();
+private:
+	static void	check_resource_loader();
 
-	private:
-		static ResourceLoader *_resource_loader;
-
+	std::vector<Object*>		_objects;
 };

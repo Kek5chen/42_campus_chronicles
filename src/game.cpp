@@ -1,8 +1,8 @@
 #include "game.hpp"
 
-static ResourceLoader *resource_loader;
+ResourceLoader	*resource_loader;
 
-Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
+void Game::check_resource_loader() {
 	SDL_Surface	*testSurface;
 	if (resource_loader == nullptr) {
 		resource_loader = new ResourceLoader();
@@ -13,24 +13,30 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 	}
 }
 
+Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
+	check_resource_loader();
+}
+
+void Game::draw_scene() {
+	for(auto it = this->_objects.begin(); it !=  this->_objects.end(); it++)
+		(*it)->draw(this);
+}
+
+void Game::add_object(Object* object)
+{
+	for (auto it = this->_objects.begin(); it != this->_objects.end(); it++) {
+		if ((*it)->_z > object->_z) {
+			this->_objects.insert(it, object);
+			return;
+		}
+	}
+}
+
 void Game::loop() {
 	while (!this->is_closed()) {
 		this->prepare_scene();
 		this->poll_events();
 		this->draw_scene();
 		this->present_scene();
-	}
-}
-
-void Game::draw_scene()
-{
-	SDL_Surface	*surface;
-
-	surface = resource_loader->get_texture("assets/banana.png");
-	if (surface) {
-		SDL_Texture *testTexture = SDL_CreateTextureFromSurface(this->get_renderer(), surface);
-		SDL_DestroySurface(surface);
-		SDL_RenderTexture(this->get_renderer(), testTexture, nullptr, nullptr);
-		SDL_DestroyTexture(testTexture);
 	}
 }
