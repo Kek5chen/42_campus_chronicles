@@ -4,9 +4,12 @@ set (CMAKE_CXX_STANDARD 20)
 
 # Create an option to switch between a system sdl library and a vendored sdl library
 option(42CC_VENDORED "Use vendored libraries" ON)
+# No shared libs as we only static build
 set(BUILD_SHARED_LIBS OFF)
 set(OUT_DIR "${CMAKE_BINARY_DIR}/Debug") # TODO: For some reason the CMAKE_BUILD_TYPE is not set at all
 
+# add the SDL2 and SDL2_image libraries to the project if the 42CC_VENDORED option is set to ON
+# otherwise, look for the SDL2 and SDL2_image libraries and fail if they can't be found
 if(42CC_VENDORED)
 	add_subdirectory(dependencies/SDL EXCLUDE_FROM_ALL)
 	add_subdirectory(dependencies/SDL_image EXCLUDE_FROM_ALL)
@@ -32,8 +35,9 @@ add_custom_command(
 add_executable(42CC src/main.cpp src/window.cpp src/game.cpp ${OUT_DIR}/resources.42CC src/resources.cpp)
 
 include_directories(dependencies/SDL_image/include)
-# Link to the actual SDL3 library. SDL3::SDL3 is the shared SDL library, SDL3::SDL3-static is the static SDL library.
+# Link to the static SDL3 library SDL3::SDL3-static.
 target_link_libraries(42CC PRIVATE SDL3::SDL3-static)
 target_link_libraries(42CC PRIVATE SDL3_image)
 
+# Add include directories for the includes folder
 target_include_directories(42CC PRIVATE includes)
