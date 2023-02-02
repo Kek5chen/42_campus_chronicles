@@ -13,7 +13,7 @@ struct ResourceDefinition {
 
 class ResourceLoader {
 public:
-	ResourceLoader() {};
+	ResourceLoader() = default;
 	~ResourceLoader();
 
 	void		load_resource_definitions(const std::string &package_filename);

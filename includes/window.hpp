@@ -15,12 +15,12 @@ class Window {
 		Window(std::string title, int width, int height);
 		~Window();
 
-		inline bool isClosed() const { return _closed; };
+		bool is_closed() const;
 
-		void pollEvents();
-		void prepareScene();
-		void drawScene();
-		void presentScene();
+		void			poll_events();
+		void			prepare_scene();
+		virtual void	draw_scene();
+		void			present_scene();
 
 	private:
 		bool init();

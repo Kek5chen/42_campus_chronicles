@@ -4,17 +4,16 @@
 #include "window.hpp"
 #include "resources.hpp"
 
-extern ResourceLoader *resource_loader;
-
 class Game : public Window {
 
 	public:
 		Game();
-		~Game() {};
+		~Game() = default;;
 
+		void draw_scene() override;
 		void loop();
 
 	private:
-		
+		static ResourceLoader *_resource_loader;
 
 };

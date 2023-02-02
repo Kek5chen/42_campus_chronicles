@@ -2,20 +2,17 @@
 #include <iostream>
 #include <utility>
 
-static ResourceLoader *resource_loader;
-
 Window::Window(std::string title, int width, int height) : _title(std::move(title)), _width(width), _height(height) {
 	if (!init())
 		this->_closed = true;
-
-	resource_loader = new ResourceLoader();
-	resource_loader->load_resource_definitions("resources.42CC");
 }
 
 Window::~Window() {
 	SDL_DestroyWindow(this->_window);
 	SDL_Quit();
 }
+
+bool Window::is_closed() const { return _closed; }
 
 bool Window::init() {
 	if (SDL_Init(SDL_INIT_VIDEO)) {
@@ -46,7 +43,7 @@ bool Window::init() {
 	return true;
 }
 
-void Window::pollEvents() {
+void Window::poll_events() {
 	SDL_Event event;
 
 	if (SDL_PollEvent(&event)) {
@@ -60,23 +57,13 @@ void Window::pollEvents() {
 	}
 }
 
-void Window::prepareScene() {
+void Window::prepare_scene() {
 	SDL_SetRenderDrawColor(this->_renderer, 0, 0, 0, 255);
 	SDL_RenderClear(this->_renderer);
 }
 
-void Window::drawScene() {
-	SDL_Surface* surface = resource_loader->get_texture("assets/img.png");
-	if (surface == nullptr) {
-		std::cerr << "Failed to load texture\n";
-		return;
-	}
-	SDL_Texture* texture = SDL_CreateTextureFromSurface(this->_renderer, surface);
-	SDL_DestroySurface(surface);
-	SDL_RenderTexture(this->_renderer, texture, nullptr, nullptr);
-	SDL_DestroyTexture(texture);
-}
+void Window::draw_scene() {}
 
-void Window::presentScene() {
+void Window::present_scene() {
 	SDL_RenderPresent(this->_renderer);
 }
