@@ -1,3 +1,5 @@
 node_modules
 build
 prisma/migrations
+prisma/dev.db
+prisma/de.db-journal
