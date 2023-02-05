@@ -16,7 +16,7 @@ public:
 	virtual void	set_size(int width, int height);
 	virtual void	set_rotation(double rotation);
 	virtual void	set_texture(SDL_Surface *texture);
-	virtual void	set_texture(std::string filename, ResourceLoader *resource_loader);
+	virtual void	set_texture(std::string &filename, ResourceLoader *resource_loader);
 
 	virtual void	draw(Window *window);
 private:
