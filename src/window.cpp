@@ -51,6 +51,14 @@ void Window::poll_events() {
 		case SDL_EVENT_QUIT:
 			_closed = true;
 			break;
+		case SDL_EVENT_WINDOW_RESIZED:
+			this->_width = event.window.data1;
+			this->_height = event.window.data2;
+			break;
+		case SDL_EVENT_WINDOW_MOVED:
+			this->x = event.window.data1;
+			this->y = event.window.data2;
+			break;
 		default:
 			break;
 		}
@@ -71,4 +79,10 @@ void Window::present_scene() {
 SDL_Renderer* Window::get_renderer() const
 {
 	return this->_renderer;
+}
+
+void Window::set_title(std::string title)
+{
+	this->_title = std::move(title);
+	SDL_SetWindowTitle(this->_window, this->_title.c_str());
 }
