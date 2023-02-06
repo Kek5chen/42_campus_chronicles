@@ -30,6 +30,7 @@ void Game::add_object(Object* object)
 			return;
 		}
 	}
+	this->_objects.push_back(object);
 }
 
 void Game::loop() {
