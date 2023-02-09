@@ -1,6 +1,5 @@
 #include <fstream>
 #include "resources.hpp"
-#include "SDL_image.h"
 
 ResourceLoader::~ResourceLoader()
 {

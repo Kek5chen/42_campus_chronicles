@@ -3,7 +3,7 @@
 #include <string>
 #include <vector>
 #include <map>
-#include "SDL_render.h"
+#include "includes.hpp"
 
 struct ResourceDefinition {
 	std::string	path;
