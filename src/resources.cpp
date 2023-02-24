@@ -17,7 +17,7 @@ void ResourceLoader::load_resource_definitions(const std::string &package_filena
 	ResourceDefinition	*def;
 
 	if(!infile.is_open())
-		return;
+		throw std::runtime_error("Could not open resource package: " + package_filename);
 	if (_resource_definitions.find(package_filename) != _resource_definitions.end())
 		unload_resource_definitions(package_filename);
 	while (infile.good()) {

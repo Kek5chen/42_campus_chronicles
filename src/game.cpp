@@ -6,15 +6,28 @@ void Game::check_resource_loader() {
 	SDL_Surface	*testSurface;
 	if (resource_loader == nullptr) {
 		resource_loader = new ResourceLoader();
-		resource_loader->load_resource_definitions("resources.42CC");
-		testSurface = resource_loader->get_texture("assets/duck.png");
+		try {
+			resource_loader->load_resource_definitions("resources.42CC");
+		} catch (std::exception &e) {
+			delete resource_loader;
+			resource_loader = nullptr;
+			throw e;
+		}
+		testSurface = resource_loader->get_texture("../assets/duck.png");
 		if (!testSurface)
 			delete resource_loader;
 	}
 }
 
 Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
-	check_resource_loader();
+	try {
+		check_resource_loader();
+	} catch (std::exception &e) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", e.what(), _window);
+		delete resource_loader;
+		resource_loader = nullptr;
+		return;
+	}
 }
 
 void Game::draw_scene() {
