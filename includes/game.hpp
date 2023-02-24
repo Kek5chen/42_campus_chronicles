@@ -10,7 +10,7 @@ extern	ResourceLoader	*resource_loader;
 class Game : public Window {
 public:
 	Game();
-	~Game() = default;
+	~Game();
 
 	void	draw_scene() override;
 	void 	add_object(Object *object);

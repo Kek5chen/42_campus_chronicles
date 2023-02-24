@@ -53,3 +53,8 @@ void Game::loop() {
 		this->present_scene();
 	}
 }
+
+Game::~Game() {
+	for (auto it = this->_objects.begin(); it != this->_objects.end(); it++)
+		delete *it;
+}
