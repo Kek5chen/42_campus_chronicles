@@ -31,7 +31,7 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 }
 
 void Game::draw_scene() {
-	for(auto it = this->_objects.begin(); it !=  this->_objects.end(); it++)
+	for(auto it = this->_objects.begin(); it < this->_objects.end(); it++)
 		(*it)->draw(this);
 }
 
