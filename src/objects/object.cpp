@@ -50,4 +50,5 @@ void Object::draw(Window *window)
 		SDL_RenderTextureRotated(window->get_renderer(), tex, nullptr, &rect, this->_rotation, nullptr, SDL_FLIP_NONE);
 	else
 		SDL_RenderTexture(window->get_renderer(), tex, nullptr, &rect);
+	SDL_DestroyTexture(tex);
 }
