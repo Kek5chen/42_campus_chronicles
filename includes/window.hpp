@@ -11,7 +11,6 @@
 // #endif
 
 class Window {
-	friend class Game;
 public:
 	Window(std::string title, int width, int height);
 	~Window();
