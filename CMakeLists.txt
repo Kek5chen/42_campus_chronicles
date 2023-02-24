@@ -7,7 +7,9 @@ option(42CC_VENDORED "Use vendored libraries" ON)
 # No shared libs as we only static build
 set(BUILD_SHARED_LIBS OFF)
 if (WIN32)
-	set(OUT_DIR "${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE}")
+	set(OUT_DIR "${CMAKE_BINARY_DIR}/$<CONFIG>")
+else()
+	set(OUT_DIR "${CMAKE_BINARY_DIR}")
 endif()
 
 # add the SDL2 and SDL2_image libraries to the project if the 42CC_VENDORED option is set to ON
