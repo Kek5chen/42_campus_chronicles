@@ -52,15 +52,3 @@ void Object::draw(Window *window)
 		SDL_RenderTexture(window->get_renderer(), tex, nullptr, &rect);
 	SDL_DestroyTexture(tex);
 }
-
-Duck::Duck(ResourceLoader *rl)
-{
-	this->set_texture(rl->get_texture("../assets/duck.png"));
-	this->set_size(100, 100);
-	this->set_position(100, 100, 100);
-}
-
-void Duck::draw(Window *window) {
-	Object::draw(window);
-	this->set_position(this->_x + 0.1, this->_y, this->_z);
-}

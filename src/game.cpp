@@ -28,14 +28,6 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 		resource_loader = nullptr;
 		return;
 	}
-	for(float y = -2000; y < 2000; y += 100)
-	{
-		for(float x = -2000; x < 2000; x += 100)
-		{
-			this->add_object(new Duck(resource_loader));
-			this->_objects.back()->set_position(x, y, 0);
-		}
-	}
 }
 
 void Game::draw_scene() {
