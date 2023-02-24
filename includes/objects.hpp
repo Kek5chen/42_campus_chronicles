@@ -27,11 +27,13 @@ protected:
 	float		_height = 0;
 	double		_rotation = 0;
 private:
-	int 		_x = 0;
-	int 		_y = 0;
-	int			_z = 0;
-	int			_width = 0;
-	int			_height = 0;
-	double		_rotation = 0;
 	SDL_Surface	*_texture = nullptr;
+};
+
+class Duck : public Object {
+public:
+	explicit Duck(ResourceLoader *rl);
+	~Duck() = default;
+
+	void	draw(Window *window);
 };
