@@ -14,7 +14,7 @@ void Game::check_resource_loader() {
 			resource_loader = nullptr;
 			throw e;
 		}
-		testSurface = resource_loader->get_texture("../assets/duck.png");
+		testSurface = resource_loader->get_texture("assets/duck.png");
 		if (!testSurface)
 			delete resource_loader;
 	}
