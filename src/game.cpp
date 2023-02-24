@@ -1,4 +1,5 @@
 #include <stdexcept>
+#include <algorithm>
 #include "game.hpp"
 
 ResourceLoader	*resource_loader;
@@ -43,6 +44,12 @@ void Game::add_object(Object* object)
 		}
 	}
 	this->_objects.push_back(object);
+}
+
+void Game::remove_object(Object *object) {
+	auto it = std::find(this->_objects.begin(), this->_objects.end(), object);
+	if (it != this->_objects.end())
+		this->_objects.erase(it);
 }
 
 void Game::loop() {
