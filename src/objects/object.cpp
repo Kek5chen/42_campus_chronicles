@@ -32,7 +32,7 @@ void Object::set_texture(SDL_Surface* texture)
 	this->_texture = texture;
 }
 
-void Object::set_texture(std::string &filename, ResourceLoader* resource_loader)
+void Object::set_texture(const std::string &filename, ResourceLoader* resource_loader)
 {
 	this->_texture = resource_loader->get_texture(filename);
 }
