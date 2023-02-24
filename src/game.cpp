@@ -1,3 +1,4 @@
+#include <stdexcept>
 #include "game.hpp"
 
 ResourceLoader	*resource_loader;
@@ -8,7 +9,7 @@ void Game::check_resource_loader() {
 		resource_loader = new ResourceLoader();
 		try {
 			resource_loader->load_resource_definitions("resources.42CC");
-		} catch (std::exception &e) {
+		} catch (std::runtime_error &e) {
 			delete resource_loader;
 			resource_loader = nullptr;
 			throw e;
@@ -22,10 +23,8 @@ void Game::check_resource_loader() {
 Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 	try {
 		check_resource_loader();
-	} catch (std::exception &e) {
-		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", e.what(), _window);
-		delete resource_loader;
-		resource_loader = nullptr;
+	} catch (std::runtime_error &e) {
+		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", e.what(), nullptr);
 		return;
 	}
 }
