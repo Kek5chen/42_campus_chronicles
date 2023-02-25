@@ -56,7 +56,7 @@ SDL_Surface *ResourceLoader::get_texture(const std::string &filename)
 			def = *it2;
 			infile.open(it->first, std::ios::binary);
 			if (!infile.is_open())
-				return nullptr;
+				throw std::runtime_error("Could not open resource package: " + it->first);
 			infile.seekg(def->data_offset, std::ios::beg);
 			data.resize(def->data_size);
 			infile.read(data.data(), def->data_size);
