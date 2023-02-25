@@ -33,9 +33,9 @@ void Object::set_texture(SDL_Surface* texture)
 	this->_texture = texture;
 }
 
-void Object::set_texture(const std::string &filename, ResourceLoader* resource_loader)
+void Object::set_texture(const std::string &filename, ResourceLoader* resourceLoader)
 {
-	this->_texture = resource_loader->get_texture(filename);
+	this->_texture = resourceLoader->get_texture(filename);
 }
 
 void Object::draw(Game *game)

@@ -2,22 +2,22 @@
 #include <algorithm>
 #include "game.hpp"
 
-ResourceLoader	*resource_loader;
+ResourceLoader	*g_resource_loader;
 
 void Game::check_resource_loader() {
 	SDL_Surface	*testSurface;
-	if (resource_loader == nullptr) {
-		resource_loader = new ResourceLoader();
+	if (g_resource_loader == nullptr) {
+		g_resource_loader = new ResourceLoader();
 		try {
-			resource_loader->load_resource_definitions("resources.42CC");
+			g_resource_loader->load_resource_definitions("resources.42CC");
 		} catch (std::runtime_error &e) {
-			delete resource_loader;
-			resource_loader = nullptr;
+			delete g_resource_loader;
+			g_resource_loader = nullptr;
 			throw e;
 		}
-		testSurface = resource_loader->get_texture("assets/duck.png");
+		testSurface = g_resource_loader->get_texture("assets/duck.png");
 		if (!testSurface)
-			delete resource_loader;
+			delete g_resource_loader;
 	}
 }
 
@@ -63,6 +63,6 @@ void Game::loop() {
 }
 
 Game::~Game() {
-	for (auto it = this->_objects.begin(); it != this->_objects.end(); it++)
-		delete *it;
+	for (auto & _object : this->_objects)
+		delete _object;
 }

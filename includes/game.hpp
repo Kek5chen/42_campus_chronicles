@@ -5,7 +5,7 @@
 #include "resources.hpp"
 #include "objects.hpp"
 
-extern	ResourceLoader	*resource_loader;
+extern	ResourceLoader	*g_resource_loader;
 
 class Game : public Window {
 public:

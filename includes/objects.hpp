@@ -17,7 +17,7 @@ public:
 	virtual void	set_size(float width, float height);
 	virtual void	set_rotation(double rotation);
 	virtual void	set_texture(SDL_Surface *texture);
-	virtual void	set_texture(const std::string &filename, ResourceLoader *resource_loader);
+	virtual void	set_texture(const std::string &filename, ResourceLoader *resourceLoader);
 
 	virtual void	draw(Game *game);
 protected:
