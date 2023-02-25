@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.0)
-project(42CC LANGUAGES C CXX OBJC OBJCXX)
+# if compiling on mac os, use the objc and objc++ languages
+if(APPLE)
+	project(42CC LANGUAGES C CXX OBJC OBJCXX)
+else()
+	project(42CC LANGUAGES C CXX)
+endif()
 set (CMAKE_CXX_STANDARD 20)
 
 # Create an option to switch between a system sdl library and a vendored sdl library
