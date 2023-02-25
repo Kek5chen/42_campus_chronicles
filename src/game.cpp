@@ -62,10 +62,6 @@ void Game::loop() {
 	}
 }
 
-void Game::close() {
-	this->_closed = true;
-}
-
 Game::~Game() {
 	for (auto it = this->_objects.begin(); it != this->_objects.end(); it++)
 		delete *it;

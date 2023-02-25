@@ -25,6 +25,8 @@ public:
 	SDL_Renderer	*get_renderer() const;
 
 	void 			set_title(std::string title);
+
+	void			close();
 protected:
 	bool init();
 

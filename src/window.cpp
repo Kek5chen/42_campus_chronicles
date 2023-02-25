@@ -86,3 +86,7 @@ void Window::set_title(std::string title)
 	this->_title = std::move(title);
 	SDL_SetWindowTitle(this->_window, this->_title.c_str());
 }
+
+void Window::close() {
+	this->_closed = true;
+}
