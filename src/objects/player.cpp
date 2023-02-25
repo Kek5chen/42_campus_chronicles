@@ -25,5 +25,7 @@ void Player::draw(Game *game) {
 		this->_y -= 10;
 	if (game->is_key_pressed(SDL_SCANCODE_S))
 		this->_y += 10;
+	game->camera.x = this->_x;
+	game->camera.y = this->_y;
 	Object::draw(game);
 }
