@@ -59,6 +59,14 @@ void Window::poll_events() {
 			this->x = event.window.data1;
 			this->y = event.window.data2;
 			break;
+		case SDL_EVENT_KEY_DOWN:
+		case SDL_EVENT_KEY_UP:
+			if (event.key.repeat == 0) {
+				this->_key_states_changed = true;
+				this->_key_states[event.key.keysym.scancode].pressed = event.key.state == SDL_PRESSED;
+				this->_key_states[event.key.keysym.scancode].changed = true;
+			}
+			break;
 		default:
 			break;
 		}
@@ -68,6 +76,11 @@ void Window::poll_events() {
 void Window::prepare_scene() {
 	SDL_SetRenderDrawColor(this->_renderer, 0, 0, 0, 255);
 	SDL_RenderClear(this->_renderer);
+	if (this->_key_states_changed) {
+		for (auto &key_state: this->_key_states)
+			key_state.changed = false;
+		this->_key_states_changed = false;
+	}
 }
 
 void Window::draw_scene() {}
@@ -85,6 +98,18 @@ void Window::set_title(std::string title)
 {
 	this->_title = std::move(title);
 	SDL_SetWindowTitle(this->_window, this->_title.c_str());
+}
+
+bool Window::is_key_down(SDL_Scancode key) {
+	return this->_key_states[key].pressed && this->_key_states[key].changed;
+}
+
+bool Window::is_key_pressed(SDL_Scancode key) {
+	return this->_key_states[key].pressed;
+}
+
+bool Window::is_key_released(SDL_Scancode key) {
+	return !this->_key_states[key].pressed && this->_key_states[key].changed;
 }
 
 void Window::close() {
