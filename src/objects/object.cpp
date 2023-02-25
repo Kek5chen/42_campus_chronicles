@@ -42,8 +42,8 @@ void Object::draw(Game *game)
 {
 	SDL_Texture	*tex;
 	SDL_FRect	rect;
-	rect.x = this->_x;
-	rect.y = this->_y;
+	rect.x = this->_x - game->camera.x - this->_width / 2 + game->get_width() / 2;
+	rect.y = this->_y - game->camera.y - this->_height / 2 + game->get_height() / 2;
 	rect.w = this->_width;
 	rect.h = this->_height;
 	tex = SDL_CreateTextureFromSurface(game->get_renderer(), this->_texture);
