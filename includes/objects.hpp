@@ -21,11 +21,12 @@ public:
 
 	virtual void	draw(Game *game);
 protected:
-	float 		_x = 0;
-	float 		_y = 0;
-	float		_z = 0;
-	float		_width = 0;
-	float		_height = 0;
-	double		_rotation = 0;
+	float 				_x = 0;
+	float 				_y = 0;
+	float				_z = 0;
+	float				_width = 0;
+	float				_height = 0;
+	double				_rotation = 0;
+	SDL_RendererFlip	_flip = SDL_FLIP_NONE;
 	SDL_Surface	*_texture = nullptr;
 };

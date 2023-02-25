@@ -47,8 +47,8 @@ void Object::draw(Game *game)
 	rect.w = this->_width;
 	rect.h = this->_height;
 	tex = SDL_CreateTextureFromSurface(game->get_renderer(), this->_texture);
-	if (this->_rotation != 0)
-		SDL_RenderTextureRotated(game->get_renderer(), tex, nullptr, &rect, this->_rotation, nullptr, SDL_FLIP_NONE);
+	if (this->_rotation != 0 || this->_flip)
+		SDL_RenderTextureRotated(game->get_renderer(), tex, nullptr, &rect, this->_rotation, nullptr, this->_flip);
 	else
 		SDL_RenderTexture(game->get_renderer(), tex, nullptr, &rect);
 	SDL_DestroyTexture(tex);
