@@ -21,4 +21,6 @@ private:
 	static void	check_resource_loader();
 
 	std::vector<Object*>		_objects;
+
+	void close();
 };

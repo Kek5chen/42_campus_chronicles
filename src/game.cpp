@@ -26,6 +26,7 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 		check_resource_loader();
 	} catch (std::runtime_error &e) {
 		SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", e.what(), nullptr);
+		this->close();
 		return;
 	}
 }
@@ -59,6 +60,10 @@ void Game::loop() {
 		this->draw_scene();
 		this->present_scene();
 	}
+}
+
+void Game::close() {
+	this->_closed = true;
 }
 
 Game::~Game() {
