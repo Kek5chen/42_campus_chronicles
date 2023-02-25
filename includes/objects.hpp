@@ -4,7 +4,8 @@
 #include <vector>
 #include "includes.hpp"
 #include "resources.hpp"
-#include "window.hpp"
+
+class Game;
 
 class Object {
 	friend class Game;
@@ -18,7 +19,7 @@ public:
 	virtual void	set_texture(SDL_Surface *texture);
 	virtual void	set_texture(const std::string &filename, ResourceLoader *resource_loader);
 
-	virtual void	draw(Window *window);
+	virtual void	draw(Game *game);
 protected:
 	float 		_x = 0;
 	float 		_y = 0;

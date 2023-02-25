@@ -1,6 +1,7 @@
 #include "objects.hpp"
 #include "window.hpp"
 #include "includes.hpp"
+#include "game.hpp"
 
 Object::Object() = default;
 
@@ -37,7 +38,7 @@ void Object::set_texture(const std::string &filename, ResourceLoader* resource_l
 	this->_texture = resource_loader->get_texture(filename);
 }
 
-void Object::draw(Window *window)
+void Object::draw(Game *game)
 {
 	SDL_Texture	*tex;
 	SDL_FRect	rect;
@@ -45,10 +46,10 @@ void Object::draw(Window *window)
 	rect.y = this->_y;
 	rect.w = this->_width;
 	rect.h = this->_height;
-	tex = SDL_CreateTextureFromSurface(window->get_renderer(), this->_texture);
+	tex = SDL_CreateTextureFromSurface(game->get_renderer(), this->_texture);
 	if (this->_rotation != 0)
-		SDL_RenderTextureRotated(window->get_renderer(), tex, nullptr, &rect, this->_rotation, nullptr, SDL_FLIP_NONE);
+		SDL_RenderTextureRotated(game->get_renderer(), tex, nullptr, &rect, this->_rotation, nullptr, SDL_FLIP_NONE);
 	else
-		SDL_RenderTexture(window->get_renderer(), tex, nullptr, &rect);
+		SDL_RenderTexture(game->get_renderer(), tex, nullptr, &rect);
 	SDL_DestroyTexture(tex);
 }
