@@ -1,6 +1,7 @@
 #include <stdexcept>
 #include <algorithm>
 #include "game.hpp"
+#include "objects/player.hpp"
 
 ResourceLoader	*g_resource_loader;
 
@@ -12,6 +13,7 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 		this->close();
 		return;
 	}
+	this->add_object(new Player());
 }
 
 Game::~Game() {
