@@ -31,6 +31,7 @@ bool Window::init() {
 		std::cerr << "Failed to create window\n";
 		return false;
 	}
+	SDL_GetWindowPosition(this->_window, &x, &y);
 
 	this->_renderer = SDL_CreateRenderer(this->_window, nullptr,
 										 SDL_RENDERER_ACCELERATED);
