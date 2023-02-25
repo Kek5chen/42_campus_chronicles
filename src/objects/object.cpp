@@ -1,4 +1,4 @@
-#include "objects.hpp"
+#include "objects/objects.hpp"
 #include "window.hpp"
 #include "includes.hpp"
 #include "game.hpp"

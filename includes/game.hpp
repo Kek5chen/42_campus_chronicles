@@ -3,7 +3,7 @@
 #include "includes.hpp"
 #include "window.hpp"
 #include "resources.hpp"
-#include "objects.hpp"
+#include "objects/objects.hpp"
 
 extern	ResourceLoader	*g_resource_loader;
 
