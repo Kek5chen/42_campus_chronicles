@@ -1,5 +1,3 @@
-#include <stdio.h> /* printf and fprintf */
-#include "window.hpp"
 #include "game.hpp"
 
 
