@@ -27,19 +27,25 @@ public:
 	void			present_scene();
 	SDL_Renderer	*get_renderer() const;
 	void 			set_title(std::string title);
+	int				get_width() const;
+	int				get_height() const;
+	int				get_x() const;
+	int				get_y() const;
+	void			set_position(int x, int y);
+	void			set_size(int width, int height);
 	bool			is_key_down(SDL_Scancode key);
 	bool			is_key_pressed(SDL_Scancode key);
 	bool			is_key_released(SDL_Scancode key);
 	void			close();
 
-protected:
+private:
 	bool 			init();
 
 	std::string 	_title;
 	int				_width;
 	int				_height;
-	int				x{};
-	int				y{};
+	int				_x{};
+	int				_y{};
 	bool 			_closed = false;
 	SDL_Window		*_window = nullptr;
 	SDL_Renderer	*_renderer = nullptr;

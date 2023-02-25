@@ -31,7 +31,7 @@ bool Window::init() {
 		std::cerr << "Failed to create window\n";
 		return false;
 	}
-	SDL_GetWindowPosition(this->_window, &x, &y);
+	SDL_GetWindowPosition(this->_window, &_x, &_y);
 
 	this->_renderer = SDL_CreateRenderer(this->_window, nullptr,
 										 SDL_RENDERER_ACCELERATED);
@@ -57,8 +57,8 @@ void Window::poll_events() {
 			this->_height = event.window.data2;
 			break;
 		case SDL_EVENT_WINDOW_MOVED:
-			this->x = event.window.data1;
-			this->y = event.window.data2;
+			this->_x = event.window.data1;
+			this->_y = event.window.data2;
 			break;
 		case SDL_EVENT_KEY_DOWN:
 		case SDL_EVENT_KEY_UP:
@@ -99,6 +99,34 @@ void Window::set_title(std::string title)
 {
 	this->_title = std::move(title);
 	SDL_SetWindowTitle(this->_window, this->_title.c_str());
+}
+
+int Window::get_width() const {
+	return _width;
+}
+
+int Window::get_height() const {
+	return _height;
+}
+
+int Window::get_x() const {
+	return _x;
+}
+
+int Window::get_y() const {
+	return _y;
+}
+
+void Window::set_position(int x, int y) {
+	this->_x = x;
+	this->_y = y;
+	SDL_SetWindowPosition(this->_window, this->_x, this->_y);
+}
+
+void Window::set_size(int width, int height) {
+	this->_width = width;
+	this->_height = height;
+	SDL_SetWindowSize(this->_window, this->_width, this->_height);
 }
 
 bool Window::is_key_down(SDL_Scancode key) {
