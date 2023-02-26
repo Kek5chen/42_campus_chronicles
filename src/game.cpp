@@ -13,7 +13,7 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 		this->close();
 		return;
 	}
-	this->add_object(new Player());
+	this->add_object(new Player(this));
 }
 
 Game::~Game() {
@@ -43,7 +43,7 @@ void Game::check_resource_loader() {
 
 void Game::draw_scene() {
 	for(auto it = this->_objects.begin(); it < this->_objects.end(); it++)
-		(*it)->draw(this);
+		(*it)->draw();
 }
 
 void Game::add_object(Object* object)

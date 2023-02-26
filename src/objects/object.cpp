@@ -3,11 +3,13 @@
 #include "includes.hpp"
 #include "game.hpp"
 
-Object::Object() = default;
+Object::Object(Game* game) : _game(game) {}
 
 Object::~Object() {
+	if (this->_surface != nullptr)
+		SDL_DestroySurface(this->_surface);
 	if (this->_texture != nullptr)
-		SDL_DestroySurface(this->_texture);
+		SDL_DestroyTexture(this->_texture);
 }
 
 void Object::set_position(float x, float y, float z)
@@ -28,28 +30,37 @@ void Object::set_rotation(double rotation)
 	this->_rotation = rotation;
 }
 
-void Object::set_texture(SDL_Surface* texture)
+void Object::set_texture(SDL_Surface* surface)
 {
-	this->_texture = texture;
+	if (!surface)
+		return;
+	if (this->_texture)
+		SDL_DestroyTexture(this->_texture);
+	this->_surface = surface;
+	this->_width = this->_surface->w / 4;
+	this->_height = this->_surface->h / 4;
+	this->_texture = SDL_CreateTextureFromSurface(this->_game->get_renderer(), this->_surface);
 }
 
 void Object::set_texture(const std::string &filename, ResourceLoader* resourceLoader)
 {
-	this->_texture = resourceLoader->get_texture(filename);
+	if (!resourceLoader)
+		return;
+	set_texture(resourceLoader->get_texture(filename));
 }
 
-void Object::draw(Game *game)
+void Object::draw()
 {
-	SDL_Texture	*tex;
 	SDL_FRect	rect;
-	rect.x = this->_x - game->camera.x - this->_width / 2 + game->get_width() / 2;
-	rect.y = this->_y - game->camera.y - this->_height / 2 + game->get_height() / 2;
+
+	if (!this->_game)
+		return;
+	rect.x = this->_x - this->_game->camera.x - this->_width / 2 + this->_game->get_width() / 2;
+	rect.y = this->_y - this->_game->camera.y - this->_height / 2 + this->_game->get_height() / 2;
 	rect.w = this->_width;
 	rect.h = this->_height;
-	tex = SDL_CreateTextureFromSurface(game->get_renderer(), this->_texture);
 	if (this->_rotation != 0 || this->_flip)
-		SDL_RenderTextureRotated(game->get_renderer(), tex, nullptr, &rect, this->_rotation, nullptr, this->_flip);
+		SDL_RenderTextureRotated(this->_game->get_renderer(), _texture, nullptr, &rect, this->_rotation, nullptr, this->_flip);
 	else
-		SDL_RenderTexture(game->get_renderer(), tex, nullptr, &rect);
-	SDL_DestroyTexture(tex);
+		SDL_RenderTexture(this->_game->get_renderer(), _texture, nullptr, &rect);
 }

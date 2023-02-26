@@ -4,8 +4,8 @@
 
 class Player : public Object {
 public:
-	Player();
+	explicit Player(Game *game);
 	~Player();
 
-	void draw(Game *game) override;
+	void draw() override;
 };
