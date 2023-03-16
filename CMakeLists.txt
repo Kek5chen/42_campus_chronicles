@@ -43,7 +43,7 @@ add_custom_command(
 
 # Create game executable
 add_executable(42CC ${OUT_DIR}/resources.42CC
-		src/main.cpp src/window.cpp src/game.cpp src/resources.cpp src/objects/object.cpp src/objects/player.cpp)
+		src/main.cpp src/window.cpp src/game.cpp src/resources.cpp src/objects/sprite2d.cpp src/objects/player.cpp)
 
 include_directories(dependencies/SDL_image/include)
 # Link to the static SDL3 library SDL3::SDL3-static.
