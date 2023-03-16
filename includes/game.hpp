@@ -13,6 +13,7 @@ public:
 	Game();
 	~Game();
 
+	void	update_scene();
 	void	draw_scene() override;
 	void 	add_object(Object *object);
 	void 	remove_object(Object *object);

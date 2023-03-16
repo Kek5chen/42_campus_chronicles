@@ -41,6 +41,11 @@ void Game::check_resource_loader() {
 	}
 }
 
+void Game::update_scene() {
+	for (auto it = this->_objects.begin(); it < this->_objects.end(); it++)
+		(*it)->update();
+}
+
 void Game::draw_scene() {
 	for(auto it = this->_objects.begin(); it < this->_objects.end(); it++)
 		(*it)->draw();
@@ -49,7 +54,7 @@ void Game::draw_scene() {
 void Game::add_object(Object* object)
 {
 	for (auto it = this->_objects.begin(); it != this->_objects.end(); it++) {
-		if ((*it)->_z > object->_z) {
+		if ((*it)->z > object->z) {
 			this->_objects.insert(it, object);
 			return;
 		}
@@ -67,6 +72,7 @@ void Game::loop() {
 	while (!this->is_closed()) {
 		this->prepare_scene();
 		this->poll_events();
+		this->update_scene();
 		this->draw_scene();
 		this->present_scene();
 	}

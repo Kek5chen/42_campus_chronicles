@@ -2,10 +2,10 @@
 
 #include "objects.hpp"
 
-class Player : public Object {
+class Player : public Sprite2D {
 public:
 	explicit Player(Game *game);
-	~Player();
+	~Player() override;
 
-	void draw() override;
+	void update() override;
 };

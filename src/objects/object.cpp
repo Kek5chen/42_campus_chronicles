@@ -3,58 +3,52 @@
 #include "includes.hpp"
 #include "game.hpp"
 
-Object::Object(Game* game) : _game(game) {}
+Sprite2D::Sprite2D(Game* game) : _game(game) {}
 
-Object::~Object() {
+Sprite2D::~Sprite2D() {
 	SDL_DestroySurface(this->_surface);
 	if (this->_texture != nullptr)
 		SDL_DestroyTexture(this->_texture);
 }
 
-void Object::set_position(float x, float y, float z)
-{
-	this->_x = x;
-	this->_y = y;
-	this->_z = z;
-}
-
-void Object::set_size(float width, float height)
+void Sprite2D::set_size(float width, float height)
 {
 	this->_width = width;
 	this->_height = height;
 }
 
-void Object::set_rotation(double rotation)
+void Sprite2D::set_rotation(double rotation)
 {
 	this->_rotation = rotation;
 }
 
-void Object::set_texture(SDL_Surface* surface)
+void Sprite2D::set_texture(SDL_Surface* surface)
 {
 	if (!surface)
 		return;
-	SDL_DestroyTexture(this->_texture);
+	if (this->_texture)
+		SDL_DestroyTexture(this->_texture);
 	this->_surface = surface;
 	this->_width = this->_surface->w / 4;
 	this->_height = this->_surface->h / 4;
 	this->_texture = SDL_CreateTextureFromSurface(this->_game->get_renderer(), this->_surface);
 }
 
-void Object::set_texture(const std::string &filename, ResourceLoader* resourceLoader)
+void Sprite2D::set_texture(const std::string &filename, ResourceLoader* resourceLoader)
 {
 	if (!resourceLoader)
 		return;
 	set_texture(resourceLoader->get_texture(filename));
 }
 
-void Object::draw()
+void Sprite2D::draw()
 {
 	SDL_FRect	rect;
 
 	if (!this->_game)
 		return;
-	rect.x = this->_x - this->_game->camera.x - this->_width / 2 + this->_game->get_width() / 2;
-	rect.y = this->_y - this->_game->camera.y - this->_height / 2 + this->_game->get_height() / 2;
+	rect.x = this->x - this->_game->camera.x - this->_width / 2 + this->_game->get_width() / 2;
+	rect.y = this->y - this->_game->camera.y - this->_height / 2 + this->_game->get_height() / 2;
 	rect.w = this->_width;
 	rect.h = this->_height;
 	if (this->_rotation != 0 || this->_flip)
