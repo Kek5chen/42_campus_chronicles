@@ -12,7 +12,7 @@ class Sprite2D : public Object {
 	friend class Game;
 public:
 	explicit Sprite2D(Game *game);
-	~Sprite2D();
+	~Sprite2D() override;
 
 	virtual void	set_size(float width, float height);
 	virtual void	set_rotation(double rotation);
