@@ -6,8 +6,7 @@
 Object::Object(Game* game) : _game(game) {}
 
 Object::~Object() {
-	if (this->_surface != nullptr)
-		SDL_DestroySurface(this->_surface);
+	SDL_DestroySurface(this->_surface);
 	if (this->_texture != nullptr)
 		SDL_DestroyTexture(this->_texture);
 }
@@ -34,8 +33,7 @@ void Object::set_texture(SDL_Surface* surface)
 {
 	if (!surface)
 		return;
-	if (this->_texture)
-		SDL_DestroyTexture(this->_texture);
+	SDL_DestroyTexture(this->_texture);
 	this->_surface = surface;
 	this->_width = this->_surface->w / 4;
 	this->_height = this->_surface->h / 4;
