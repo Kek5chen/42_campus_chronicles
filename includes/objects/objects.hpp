@@ -34,6 +34,23 @@ private:
 
 };
 
-class Object3D {
+class Object3D : public Object{
+public:
+	Object3D();
+	~Object3D();
+
+	virtual void 	add_triangle();
+	virtual void	set_size(float x, float y, float z);
+	virtual void	set_rotation(float pitch, float yaw, float roll);
+
+	virtual void	draw();
+
+protected:
+	float 	_sizeX = 1;
+	float 	_sizeY = 1;
+	float 	_sizeZ = 1;
+	float	_pitch = 0;
+	float	_yaw = 0;
+	float	_roll = 0;
 
 };

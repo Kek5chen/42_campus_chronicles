@@ -53,7 +53,7 @@ void Game::draw_scene() {
 void Game::add_object(Object* object)
 {
 	for (auto it = this->_objects.begin(); it != this->_objects.end(); it++) {
-		if ((*it)->z > object->z) {
+		if ((*it)->pos.z > object->pos.z) {
 			this->_objects.insert(it, object);
 			return;
 		}

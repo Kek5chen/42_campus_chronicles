@@ -47,8 +47,8 @@ void Sprite2D::draw()
 
 	if (!this->_game)
 		return;
-	rect.x = this->x - this->_game->camera.x - this->_width / 2 + this->_game->get_width() / 2;
-	rect.y = this->y - this->_game->camera.y - this->_height / 2 + this->_game->get_height() / 2;
+	rect.x = this->pos.x - this->_game->camera.pos.x - this->_width / 2 + this->_game->get_width() / 2;
+	rect.y = this->pos.y - this->_game->camera.pos.y - this->_height / 2 + this->_game->get_height() / 2;
 	rect.w = this->_width;
 	rect.h = this->_height;
 	if (this->_rotation != 0 || this->_flip)
