@@ -4,19 +4,9 @@
 #include <vector>
 #include "includes.hpp"
 #include "resources.hpp"
+#include "engine.hpp"
 
 class Game;
-
-struct Object {
-	virtual ~Object() = default;
-
-	virtual void 	update() = 0;
-	virtual void	draw() = 0;
-
-	float 				x = 0;
-	float 				y = 0;
-	float				z = 0;
-};
 
 class Sprite2D : public Object {
 	friend class Game;
@@ -41,5 +31,9 @@ protected:
 private:
 	SDL_Surface*		_surface = nullptr;
 	SDL_Texture*		_texture = nullptr;
+
+};
+
+class Object3D {
 
 };
