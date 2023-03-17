@@ -13,7 +13,21 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 		this->close();
 		return;
 	}
-	this->add_object(new Player(this));
+	Object3D *obj = new Object3D(this);
+	obj->add_triangle({{{-.05f, .05f, -0.05},
+						{.05f, 0.f, -0.05},
+						{-.05f, -.05f, -0.05}}});
+	obj->add_triangle({{{-.05f, .05f, -0.05},
+						{0.f, 0.f, .05f},
+						{-.05f, -.05f, -0.05}}});
+	obj->add_triangle({{{0.f, 0.f, .05f},
+						{.05f, 0.f, -0.05},
+						{-.05f, -.05f, -0.05}}});
+	obj->add_triangle({{{-.05f, .05f, -0.05},
+						{.05f, 0.f, -0.05},
+						{0.f, 0.f, .05f}}});
+	obj->pos = {0, 0, -60};
+	this->add_object(obj);
 }
 
 Game::~Game() {
@@ -41,6 +55,7 @@ void Game::check_resource_loader() {
 }
 
 void Game::update_scene() {
+	this->update_camera();
 	for (auto it = this->_objects.begin(); it < this->_objects.end(); it++)
 		(*it)->update();
 }
@@ -71,7 +86,6 @@ void Game::loop() {
 	while (!this->is_closed()) {
 		this->prepare_scene();
 		this->poll_events();
-		this->update_camera();
 		this->update_scene();
 		this->draw_scene();
 		this->present_scene();
