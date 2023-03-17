@@ -33,23 +33,25 @@ private:
 
 };
 
-class Object3D : public Object{
+class Object3D : public Object {
 public:
-	Object3D();
-	~Object3D();
+	explicit Object3D(Game *game);
+	~Object3D() override = default;
 
-	virtual void 	add_triangle();
+	virtual void	set_size(Vector3 size);
 	virtual void	set_size(float x, float y, float z);
+	virtual void	set_rotation(Vector3 rotation);
 	virtual void	set_rotation(float pitch, float yaw, float roll);
 
-	virtual void	draw();
+	void 	add_triangle(Triangle3 triangle);
+	void 	update() override;
+	void	draw() override;
 
 protected:
-	float 	_sizeX = 1;
-	float 	_sizeY = 1;
-	float 	_sizeZ = 1;
-	float	_pitch = 0;
-	float	_yaw = 0;
-	float	_roll = 0;
+	Vector3	_size;
+	Vector3	_rotation;
+	Game*	_game = nullptr;
+
+	std::vector<Triangle3>	_triangles;
 
 };
