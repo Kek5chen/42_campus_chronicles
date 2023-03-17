@@ -9,19 +9,19 @@
 Vector2::Vector2(float x, float y) : x(x), y(y) {}
 
 Vector2 Vector2::operator+(const Vector2& other) const {
-	return Vector2(this->x + other.x, this->y + other.y);
+	return {this->x + other.x, this->y + other.y};
 }
 
 Vector2 Vector2::operator-(const Vector2& other) const {
-	return Vector2(this->x- other.x, this->y - other.y);
+	return {this->x- other.x, this->y - other.y};
 }
 
 Vector2 Vector2::operator*(const Vector2& other) const {
-	return Vector2(this->x * other.x, this->x * other.x);
+	return {this->x * other.x, this->x * other.x};
 }
 
 Vector2 Vector2::operator/(const Vector2& other) const {
-	return Vector2(this->x / other.x, this->y / other.y);
+	return {this->x / other.x, this->y / other.y};
 }
 
 float& Vector2::operator[](int index) {
@@ -41,19 +41,19 @@ const float& Vector2::operator[](int index) const {
 Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
 
 Vector3 Vector3::operator+(const Vector3 &other) const {
-	return Vector3(this->x + other.x, this->y + other.y, this->z + other.z);
+	return {this->x + other.x, this->y + other.y, this->z + other.z};
 }
 
 Vector3 Vector3::operator-(const Vector3 &other) const {
-	return Vector3(this->x - other.x, this->y - other.y, this->z - other.z);
+	return {this->x - other.x, this->y - other.y, this->z - other.z};
 }
 
 Vector3 Vector3::operator*(const Vector3 &other) const {
-	return Vector3(this->x * other.x, this->y * other.y, this->z * other.z);
+	return {this->x * other.x, this->y * other.y, this->z * other.z};
 }
 
 Vector3 Vector3::operator/(const Vector3 &other) const {
-	return Vector3(this->x / other.x, this->y / other.y, this->z / other.z);
+	return {this->x / other.x, this->y / other.y, this->z / other.z};
 }
 
 float& Vector3::operator[](int index) {
@@ -73,19 +73,19 @@ const float& Vector3::operator[](int index) const {
 Vector4::Vector4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
 
 Vector4 Vector4::operator+(const Vector4 &other) const {
-	return Vector4(this->x + other.x, this->y + other.y, this->z + other.z, this->w + other.w);
+	return {this->x + other.x, this->y + other.y, this->z + other.z, this->w + other.w};
 }
 
 Vector4 Vector4::operator-(const Vector4 &other) const {
-	return Vector4(this->x - other.x, this->y - other.y, this->z - other.z, this->w - other.w);
+	return {this->x - other.x, this->y - other.y, this->z - other.z, this->w - other.w};
 }
 
 Vector4 Vector4::operator*(const Vector4 &other) const {
-	return Vector4(this->x * other.x, this->y * other.y, this->z * other.z, this->w * other.w);
+	return {this->x * other.x, this->y * other.y, this->z * other.z, this->w * other.w};
 }
 
 Vector4 Vector4::operator/(const Vector4 &other) const {
-	return Vector4(this->x / other.x, this->y / other.y, this->z / other.z, this->w / other.w);
+	return {this->x / other.x, this->y / other.y, this->z / other.z, this->w / other.w};
 }
 
 float& Vector4::operator[](int index) {
@@ -103,9 +103,9 @@ const float &Vector4::operator[](int index) const {
 
 
 Matrix4::Matrix4() {
-    for (int i = 0; i < 4; i++) {
+    for (auto& i : v) {
         for (int j = 0; j < 4; j++) {
-            v[i][j] = 0;
+            i[j] = 0;
         }
     }
 }
