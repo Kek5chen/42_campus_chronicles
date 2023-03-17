@@ -5,8 +5,8 @@ Player::Player(Game *game) : Sprite2D(game) {
 	this->pos.x = 100;
 	this->pos.y = 100;
 	this->pos.z = 0;
-	this->_width = 300;
-	this->_height = 200;
+	this->_size.x = 300;
+	this->_size.y = 200;
 	this->_rotation = 0;
 	this->set_texture("assets/player.png", g_resource_loader);
 }

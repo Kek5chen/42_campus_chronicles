@@ -4,7 +4,7 @@
 #include <vector>
 #include "includes.hpp"
 #include "resources.hpp"
-#include "engine.hpp"
+#include "engine/base_objects.hpp"
 
 class Game;
 
@@ -22,8 +22,7 @@ public:
 	void			draw() override;
 
 protected:
-	float				_width = 0;
-	float				_height = 0;
+	Vector2				_size;
 	double				_rotation = 0;
 	SDL_RendererFlip	_flip = SDL_FLIP_NONE;
 	Game*				_game = nullptr;

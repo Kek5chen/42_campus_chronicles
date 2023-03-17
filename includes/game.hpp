@@ -4,7 +4,7 @@
 #include "window.hpp"
 #include "resources.hpp"
 #include "objects/objects.hpp"
-#include "engine.hpp"
+#include "engine/base_objects.hpp"
 
 extern	ResourceLoader	*g_resource_loader;
 
