@@ -14,6 +14,10 @@ struct Vector2 {
     Vector2         operator*(float scalar) const;
 	float&			operator[](int index);
 	const float&	operator[](int index) const;
+    void            operator+=(const Vector2& other);
+    void            operator-=(const Vector2& other);
+    void            operator*=(const Vector2& other);
+    void            operator/=(const Vector2& other);
 
 	float x, y;
 };
@@ -30,6 +34,10 @@ struct Vector3 {
     Vector3         operator*(float scalar) const;
 	float&			operator[](int index);
 	const float&	operator[](int index) const;
+    void            operator+=(const Vector3& other);
+    void            operator-=(const Vector3& other);
+    void            operator*=(const Vector3& other);
+    void            operator/=(const Vector3& other);
 
 	float x, y, z;
 };
@@ -46,6 +54,10 @@ struct Vector4 {
     Vector4         operator*(float scalar) const;
 	float&			operator[](int index);
 	const float&	operator[](int index) const;
+    void            operator+=(const Vector4& other);
+    void            operator-=(const Vector4& other);
+    void            operator*=(const Vector4& other);
+    void            operator/=(const Vector4& other);
 
 	float x, y, z, w;
 };

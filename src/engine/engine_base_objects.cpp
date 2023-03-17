@@ -36,6 +36,26 @@ const float& Vector2::operator[](int index) const {
     return (&x)[index];
 }
 
+void Vector2::operator+=(const Vector2 &other) {
+    this->x += other.x;
+    this->y += other.y;
+}
+
+void Vector2::operator-=(const Vector2 &other) {
+    this->x -= other.x;
+    this->y -= other.y;
+}
+
+void Vector2::operator*=(const Vector2 &other) {
+    this->x *= other.x;
+    this->y *= other.y;
+}
+
+void Vector2::operator/=(const Vector2 &other) {
+    this->x /= other.x;
+    this->y /= other.y;
+}
+
 
 /*
  * Vector 3 Implementations
@@ -76,6 +96,30 @@ float& Vector3::operator[](int index) {
 
 const float& Vector3::operator[](int index) const {
     return (&x)[index];
+}
+
+void Vector3::operator+=(const Vector3 &other) {
+    this->x += other.x;
+    this->y += other.y;
+    this->z += other.z;
+}
+
+void Vector3::operator-=(const Vector3 &other) {
+    this->x -= other.x;
+    this->y -= other.y;
+    this->z -= other.z;
+}
+
+void Vector3::operator*=(const Vector3 &other) {
+    this->x *= other.x;
+    this->y *= other.y;
+    this->z *= other.z;
+}
+
+void Vector3::operator/=(const Vector3 &other) {
+    this->x /= other.x;
+    this->y /= other.y;
+    this->z /= other.z;
 }
 
 
@@ -119,6 +163,34 @@ float& Vector4::operator[](int index) {
 
 const float &Vector4::operator[](int index) const {
     return (&x)[index];
+}
+
+void Vector4::operator+=(const Vector4 &other) {
+    this->x += other.x;
+    this->y += other.y;
+    this->z += other.z;
+    this->w += other.w;
+}
+
+void Vector4::operator-=(const Vector4 &other) {
+    this->x -= other.x;
+    this->y -= other.y;
+    this->z -= other.z;
+    this->w -= other.w;
+}
+
+void Vector4::operator*=(const Vector4 &other) {
+    this->x *= other.x;
+    this->y *= other.y;
+    this->z *= other.z;
+    this->w *= other.w;
+}
+
+void Vector4::operator/=(const Vector4 &other) {
+    this->x /= other.x;
+    this->y /= other.y;
+    this->z /= other.z;
+    this->w /= other.w;
 }
 
 
