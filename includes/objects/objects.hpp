@@ -48,8 +48,8 @@ public:
 	void	draw() override;
 
 protected:
-	Vector3	_size;
-	Vector3	_rotation;
+	Vector3	_size {1, 1, 1};
+	Vector3	_rotation {};
 	Game*	_game = nullptr;
 
 	std::vector<Triangle3>	_triangles;
