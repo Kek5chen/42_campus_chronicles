@@ -49,9 +49,9 @@ void Object3D::draw() {
 
     for (const Triangle3& tri : _triangles) {
         Triangle3 projectedTriangle = tri;
-		for (int i = 0; i < 3; i++) {
-			Vector4 transformedVertex = modelMatrix * Vector4(projectedTriangle.v[i], 1.0f);
-			projectedTriangle.v[i] = math::point_to_screen((Vector3&)transformedVertex, projectionMatrix, screenSize);
+		for (auto & i : projectedTriangle.v) {
+			Vector4 transformedVertex = modelMatrix * Vector4(i, 1.0f);
+			i = math::point_to_screen((Vector3&)transformedVertex, projectionMatrix, screenSize);
 		}
 
         SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);

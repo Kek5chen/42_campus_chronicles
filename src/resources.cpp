@@ -3,8 +3,8 @@
 
 ResourceLoader::~ResourceLoader()
 {
-	for (auto it = _resource_definitions.begin(); it != _resource_definitions.end(); ++it)
-		unload_resource_definitions(it->first);
+	for (auto& _resource_definition : _resource_definitions)
+		unload_resource_definitions(_resource_definition.first);
 }
 
 /*
@@ -36,8 +36,8 @@ void ResourceLoader::load_resource_definitions(const std::string &package_filena
 void ResourceLoader::unload_resource_definitions(const std::string &package_filename)
 {
 	if (_resource_definitions.find(package_filename) != _resource_definitions.end()) {
-		for (auto it = _resource_definitions[package_filename].begin(); it != _resource_definitions[package_filename].end(); ++it)
-			delete *it;
+		for (auto& it : _resource_definitions[package_filename])
+			delete it;
 		_resource_definitions.erase(package_filename);
 	}
 }
@@ -47,14 +47,14 @@ std::vector<char> ResourceLoader::load_data(const std::string &filename) const {
 	std::vector<char>	data;
 	ResourceDefinition	*def;
 
-	for (auto it = _resource_definitions.begin(); it != _resource_definitions.end(); ++it) {
-		for (auto it2 = it->second.begin(); it2 != it->second.end(); ++it2) {
+	for (const auto& _resource_definition : _resource_definitions) {
+		for (auto it2 = _resource_definition.second.begin(); it2 != _resource_definition.second.end(); ++it2) {
 			if ((*it2)->path != filename)
 				continue;
 			def = *it2;
-			infile.open(it->first, std::ios::binary);
+			infile.open(_resource_definition.first, std::ios::binary);
 			if (!infile.is_open())
-				throw std::runtime_error("Could not open resource package: " + it->first);
+				throw std::runtime_error("Could not open resource package: " + _resource_definition.first);
 			infile.seekg(def->data_offset, std::ios::beg);
 			data.resize(def->data_size);
 			infile.read(data.data(), def->data_size);
