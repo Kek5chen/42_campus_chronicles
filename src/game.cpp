@@ -94,11 +94,15 @@ void Game::loop() {
 
 void Game::update_camera() {
 	if (this->is_key_pressed(SDL_SCANCODE_A))
-		this->camera.pos.x -= .02f;
+		this->camera.pos.x -= .1f;
 	if (this->is_key_pressed(SDL_SCANCODE_D))
-		this->camera.pos.x += .02f;
+		this->camera.pos.x += .1f;
 	if (this->is_key_pressed(SDL_SCANCODE_W))
-		this->camera.pos.y += .02f;
+		this->camera.pos.y += .1f;
 	if (this->is_key_pressed(SDL_SCANCODE_S))
-		this->camera.pos.y -= .02f;
+		this->camera.pos.y -= .1f;
+	if (this->is_key_pressed(SDL_SCANCODE_Q))
+		this->camera.pos.z += 100.f;
+	if (this->is_key_pressed(SDL_SCANCODE_E))
+		this->camera.pos.z -= 100.f;
 }
