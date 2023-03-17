@@ -1,7 +1,7 @@
 # 42 Campus Chronicles - An MMORPG Adventure!
 Step into the world of the 42 Campus Chronicles, a pre-release MMORPG that promises to deliver thrilling gameplay experiences. Fight against challenging bosses and monsters, complete missions and quests, and team up with other players in a multiplayer RPG world, locally on the 42 premises. With its captivating gameplay, 42 Campus Chronicles is the perfect choice for gamers looking for an immersive adventure. Join us now and be part of the pre-release excitement! Any help is welcome to deliver this project!
 
-It can only become as good as we can make it, so strap in, we welcome you grately traveler.
+It can only become as good as we can make it, so strap in, we welcome you greatly traveler.
 
 ## Installation
 
