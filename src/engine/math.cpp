@@ -80,7 +80,7 @@ namespace math {
 		return matrix * translationMatrix;
 	}
 
-	Matrix4  rotate(Matrix4& matrix, float angle, Vector3& axis) {
+	Matrix4  rotate(Matrix4& matrix, float angle, Vector3 axis) {
 		float r = radians(angle);
 		float c = std::cos(r);
 		float s = std::sin(r);

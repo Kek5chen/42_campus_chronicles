@@ -12,6 +12,6 @@ namespace math {
     Matrix4  orthographic(float aspect, float near, float far);
     Vector3  point_to_screen(Vector3& point, Matrix4& view, Vector2 &screenSize);
     Matrix4  translate(Matrix4& matrix, Vector3& translation);
-    Matrix4  rotate(Matrix4& matrix, float angle, Vector3& axis);
+    Matrix4  rotate(Matrix4& matrix, float angle, Vector3 axis);
     Matrix4  scale(Matrix4& matrix, Vector3& scale);
 }
