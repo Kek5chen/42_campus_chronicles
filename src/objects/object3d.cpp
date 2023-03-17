@@ -83,8 +83,8 @@ void Object3D::draw() {
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		Vector3 centroid{};
-		for (int i = 0; i < 3; ++i)
-			centroid += tri.normals[i];
+		for (auto normal : tri.normals)
+			centroid += normal;
 		centroid /= 3.0f;
 		centroid = centroid.normalize();
 		SDL_Vertex vertices[3];
