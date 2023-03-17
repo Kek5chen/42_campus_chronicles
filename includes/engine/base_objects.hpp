@@ -1,8 +1,5 @@
 #pragma once
 
-struct Matrix2 {
-};
-
 struct Vector2 {
 	Vector2() = default;
 	Vector2(float x, float y);
