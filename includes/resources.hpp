@@ -5,7 +5,6 @@
 #include <map>
 #include <memory>
 #include "includes.hpp"
-#include "objects/wavefront.hpp"
 
 struct ResourceDefinition {
 	std::string	path;
