@@ -53,7 +53,7 @@ void Object3D::draw() {
 		for (auto& i: projectedTriangle.v) {
 			Vector4 transformedVertex = modelMatrix * Vector4(i, 1.0f);
 			transformedVertex = modelTranslationMatrix * transformedVertex;
-			i = math::point_to_screen((Vector3 &) transformedVertex, projectionMatrix, screenSize);
+			i = transformedVertex;
 		}
 		projectedTriangle.normals[0] = tri.normals[0];
 		projectedTriangle.normals[1] = tri.normals[1];
@@ -64,7 +64,10 @@ void Object3D::draw() {
 		return a.v->z < b.v->z;
 	});
 
-	for (const Triangle3& tri : projectedTriangles) {
+	for (Triangle3& tri : projectedTriangles) {
+		for (auto& i: tri.v) {
+			i = math::point_to_screen((Vector3 &) i, projectionMatrix, screenSize);
+		}
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		Vector3 centroid{};
 		for (auto normal : tri.normals)
