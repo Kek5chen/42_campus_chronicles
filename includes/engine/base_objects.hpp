@@ -19,7 +19,7 @@ struct Vector2 {
     void            operator*=(float scalar);
     void            operator/=(float scalar);
 
-	float x, y;
+	float x = 0, y = 0;
 };
 
 struct Vector3 {
@@ -45,7 +45,7 @@ struct Vector3 {
     float           magnitude() const;
     Vector3         normalize() const;
 
-	float x, y, z;
+	float x = 0, y = 0, z = 0;
 };
 
 struct Vector4 {
@@ -68,7 +68,7 @@ struct Vector4 {
     void            operator*=(float scalar);
     void            operator/=(float scalar);
 
-	float x, y, z, w;
+	float x = 0, y = 0, z = 0, w = 0;
 };
 
 struct Matrix4 {
@@ -90,12 +90,12 @@ struct Object {
 	virtual void 	update() = 0;
 	virtual void	draw() = 0;
 
-	Vector3			pos;
+	Vector3	pos {};
 };
 
 class Camera {
 public:
-	Vector3	pos;
+	Vector3	pos {};
 };
 
 struct Triangle3 {
