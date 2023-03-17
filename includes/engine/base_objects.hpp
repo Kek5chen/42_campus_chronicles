@@ -21,6 +21,7 @@ struct Vector2 {
 struct Vector3 {
 	Vector3() = default;
 	Vector3(float x, float y, float z);
+    Vector3(Vector2 vec2, float z);
 
 	Vector3 		operator+(const Vector3& other) const;
 	Vector3 		operator-(const Vector3& other) const;
@@ -35,7 +36,8 @@ struct Vector3 {
 
 struct Vector4 {
 	Vector4() = default;
-	Vector4(float x, float y, float z, float w);
+    Vector4(float x, float y, float z, float w);
+    Vector4(Vector3 vec3, float w);
 
 	Vector4 		operator+(const Vector4& other) const;
 	Vector4 		operator-(const Vector4& other) const;
@@ -55,6 +57,7 @@ struct Matrix4 {
 	Vector4&		operator[](int index);
 	const Vector4&	operator[](int index) const;
 	Matrix4			operator*(const Matrix4& other) const;
+    Vector4         operator*(const Vector4& other) const;
 
 	Vector4	v[4];
 };

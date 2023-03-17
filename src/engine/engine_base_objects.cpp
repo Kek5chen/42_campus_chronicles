@@ -44,6 +44,12 @@ const float& Vector2::operator[](int index) const {
 
 Vector3::Vector3(float x, float y, float z) : x(x), y(y), z(z) {}
 
+Vector3::Vector3(Vector2 vec2, float z) {
+    this->x = vec2.x;
+    this->y = vec2.y;
+    this->z = z;
+}
+
 Vector3 Vector3::operator+(const Vector3 &other) const {
 	return {this->x + other.x, this->y + other.y, this->z + other.z};
 }
@@ -79,6 +85,13 @@ const float& Vector3::operator[](int index) const {
 
 
 Vector4::Vector4(float x, float y, float z, float w) : x(x), y(y), z(z), w(w) {}
+
+Vector4::Vector4(Vector3 vec3, float w) {
+    this->x = vec3.x;
+    this->y = vec3.y;
+    this->z = vec3.z;
+    this->w = w;
+}
 
 Vector4 Vector4::operator+(const Vector4 &other) const {
 	return {this->x + other.x, this->y + other.y, this->z + other.z, this->w + other.w};
@@ -142,6 +155,17 @@ Matrix4 Matrix4::operator*(const Matrix4 &other) const {
             for (int k = 0; k < 4; k++) {
                 result[i][j] += v[i][k] * other[k][j];
             }
+        }
+    }
+    return result;
+}
+
+Vector4 Matrix4::operator*(const Vector4 &other) const {
+    Vector4 result;
+    for (int i = 0; i < 4; i++) {
+        result[i] = 0;
+        for (int j = 0; j < 4; j++) {
+            result[i] += v[i][j] * other[j];
         }
     }
     return result;
