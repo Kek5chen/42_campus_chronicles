@@ -28,6 +28,10 @@ Vector2 Vector2::operator*(float scalar) const {
     return {this->x * scalar, this->y * scalar};
 }
 
+Vector2 Vector2::operator/(float scalar) const {
+    return {this->x / scalar, this->y / scalar};
+}
+
 float& Vector2::operator[](int index) {
     return (&x)[index];
 }
@@ -54,6 +58,16 @@ void Vector2::operator*=(const Vector2 &other) {
 void Vector2::operator/=(const Vector2 &other) {
     this->x /= other.x;
     this->y /= other.y;
+}
+
+void Vector2::operator*=(float scalar) {
+    this->x *= scalar;
+    this->y *= scalar;
+}
+
+void Vector2::operator/=(float scalar) {
+    this->x /= scalar;
+    this->y /= scalar;
 }
 
 
@@ -90,6 +104,10 @@ Vector3 Vector3::operator*(float scalar) const {
     return {this->x * scalar, this->y * scalar, this->z * scalar};
 }
 
+Vector3 Vector3::operator/(float scalar) const {
+    return {this->x / scalar, this->y / scalar, this->z / scalar};
+}
+
 float& Vector3::operator[](int index) {
     return (&x)[index];
 }
@@ -120,6 +138,18 @@ void Vector3::operator/=(const Vector3 &other) {
     this->x /= other.x;
     this->y /= other.y;
     this->z /= other.z;
+}
+
+void Vector3::operator*=(float scalar) {
+    this->x *= scalar;
+    this->y *= scalar;
+    this->z *= scalar;
+}
+
+void Vector3::operator/=(float scalar) {
+    this->x /= scalar;
+    this->y /= scalar;
+    this->z /= scalar;
 }
 
 
@@ -157,6 +187,10 @@ Vector4 Vector4::operator*(float scalar) const {
     return {this->x * scalar, this->y * scalar, this->z * scalar, this->w * scalar};
 }
 
+Vector4 Vector4::operator/(float scalar) const {
+    return {this->x / scalar, this->y / scalar, this->z / scalar, this->w / scalar};
+}
+
 float& Vector4::operator[](int index) {
     return (&x)[index];
 }
@@ -191,6 +225,20 @@ void Vector4::operator/=(const Vector4 &other) {
     this->y /= other.y;
     this->z /= other.z;
     this->w /= other.w;
+}
+
+void Vector4::operator*=(float scalar) {
+    this->x *= scalar;
+    this->y *= scalar;
+    this->z *= scalar;
+    this->w *= scalar;
+}
+
+void Vector4::operator/=(float scalar) {
+    this->x /= scalar;
+    this->y /= scalar;
+    this->z /= scalar;
+    this->w /= scalar;
 }
 
 
