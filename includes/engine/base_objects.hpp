@@ -1,8 +1,14 @@
 #pragma once
 
+struct Vector2;
+struct Vector3;
+struct Vector4;
+
 struct Vector2 {
 	Vector2() = default;
 	Vector2(float x, float y);
+	Vector2(Vector3 vec3);
+	Vector2(Vector4 vec4);
 
 	Vector2 		operator+(const Vector2& other) const;
 	Vector2 		operator-(const Vector2& other) const;
@@ -19,6 +25,10 @@ struct Vector2 {
     void            operator*=(float scalar);
     void            operator/=(float scalar);
 
+	float	magnitude() const;
+	Vector2	normalize() const;
+	float	distance(const Vector2 &other) const;
+
 	float x = 0, y = 0;
 };
 
@@ -26,6 +36,8 @@ struct Vector3 {
 	Vector3() = default;
 	Vector3(float x, float y, float z);
     Vector3(Vector2 vec2, float z);
+	Vector3(Vector2 vec2);
+	Vector3(Vector4 vec4);
 
 	Vector3 		operator+(const Vector3& other) const;
 	Vector3 		operator-(const Vector3& other) const;
@@ -44,6 +56,7 @@ struct Vector3 {
 
     float           magnitude() const;
     Vector3         normalize() const;
+	float 			distance(const Vector3& other) const;
 
 	float x = 0, y = 0, z = 0;
 };
@@ -52,6 +65,8 @@ struct Vector4 {
 	Vector4() = default;
     Vector4(float x, float y, float z, float w);
     Vector4(Vector3 vec3, float w);
+	Vector4(Vector2 vec2);
+	Vector4(Vector3 vec3);
 
 	Vector4 		operator+(const Vector4& other) const;
 	Vector4 		operator-(const Vector4& other) const;
