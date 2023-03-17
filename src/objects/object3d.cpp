@@ -38,21 +38,21 @@ void Object3D::draw() {
     float near = 0.1f;
     float far = 1000.0f;
 	Matrix4 modelMatrix(1.0f);
-	modelMatrix = math::translate(modelMatrix, this->pos);
+	Matrix4 modelTranslationMatrix(1.0f);
+	modelMatrix = math::scale(modelMatrix, this->_size);
 	modelMatrix = math::rotate(modelMatrix, this->_rotation.x, {1, 0, 0});
 	modelMatrix = math::rotate(modelMatrix, this->_rotation.y, {0, 1, 0});
 	modelMatrix = math::rotate(modelMatrix, this->_rotation.z, {0, 0, 1});
-	modelMatrix = math::scale(modelMatrix, this->_size);
+	modelTranslationMatrix = math::translate(modelTranslationMatrix, this->pos);
+	modelTranslationMatrix = math::translate(modelTranslationMatrix, this->_game->camera.pos);
     Matrix4 projectionMatrix = math::perspective(fov, aspect, near, far);
-	Matrix4 worldProjection(1.0f);
-	worldProjection = math::translate(worldProjection, this->_game->camera.pos);
-	projectionMatrix = worldProjection * projectionMatrix;
 
 	std::vector<Triangle3> projectedTriangles;
     for (const Triangle3& tri : _triangles) {
 		Triangle3 projectedTriangle = tri;
-		for (auto &i: projectedTriangle.v) {
+		for (auto& i: projectedTriangle.v) {
 			Vector4 transformedVertex = modelMatrix * Vector4(i, 1.0f);
+			transformedVertex = modelTranslationMatrix * transformedVertex;
 			i = math::point_to_screen((Vector3 &) transformedVertex, projectionMatrix, screenSize);
 		}
 		projectedTriangle.normals[0] = tri.normals[0];
