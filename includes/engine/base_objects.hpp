@@ -95,4 +95,5 @@ struct Object {
 
 struct Triangle3 {
 	Vector3	v[3];
+	Vector3 normals[3] {};
 };
