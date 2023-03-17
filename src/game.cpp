@@ -71,8 +71,20 @@ void Game::loop() {
 	while (!this->is_closed()) {
 		this->prepare_scene();
 		this->poll_events();
+		this->update_camera();
 		this->update_scene();
 		this->draw_scene();
 		this->present_scene();
 	}
+}
+
+void Game::update_camera() {
+	if (this->is_key_pressed(SDL_SCANCODE_A))
+		this->camera.pos.x -= .02f;
+	if (this->is_key_pressed(SDL_SCANCODE_D))
+		this->camera.pos.x += .02f;
+	if (this->is_key_pressed(SDL_SCANCODE_W))
+		this->camera.pos.y += .02f;
+	if (this->is_key_pressed(SDL_SCANCODE_S))
+		this->camera.pos.y -= .02f;
 }

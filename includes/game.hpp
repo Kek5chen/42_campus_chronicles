@@ -8,6 +8,11 @@
 
 extern	ResourceLoader	*g_resource_loader;
 
+class Camera {
+public:
+	Vector3	pos {};
+};
+
 class Game : public Window {
 public:
 	Game();
@@ -23,6 +28,8 @@ public:
 
 private:
 	static void	check_resource_loader();
+
+	void	update_camera();
 
 	std::vector<Object*>		_objects;
 };

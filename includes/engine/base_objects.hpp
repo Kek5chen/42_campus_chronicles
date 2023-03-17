@@ -93,11 +93,6 @@ struct Object {
 	Vector3	pos {};
 };
 
-class Camera {
-public:
-	Vector3	pos {};
-};
-
 struct Triangle3 {
 	Vector3	v[3];
 };
