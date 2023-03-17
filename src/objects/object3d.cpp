@@ -61,7 +61,7 @@ void Object3D::draw() {
 		projectedTriangles.push_back(projectedTriangle);
 	}
 	std::sort(projectedTriangles.begin(), projectedTriangles.end(), [](const Triangle3& a, const Triangle3& b) {
-		return a.v->z > b.v->z;
+		return a.v->z < b.v->z;
 	});
 
 	for (const Triangle3& tri : projectedTriangles) {
