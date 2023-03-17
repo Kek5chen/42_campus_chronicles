@@ -126,4 +126,8 @@ void WaveFrontObject::update() {
 		this->_rotation.y += 1.f;
 	if (_game->is_key_pressed(SDL_SCANCODE_RIGHT))
 		this->_rotation.y -= 1.f;
+	if (_game->is_key_pressed(SDL_SCANCODE_T))
+		this->_rotation.z += 1.f;
+	if (_game->is_key_pressed(SDL_SCANCODE_R))
+		this->_rotation.z -= 1.f;
 }
