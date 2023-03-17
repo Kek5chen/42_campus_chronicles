@@ -20,8 +20,8 @@ public:
 
 	void				load_resource_definitions(const std::string &package_filename);
 	void 				unload_resource_definitions(const std::string &package_filename);
-	std::vector<char>	load_data(const std::string &filename);
-	SDL_Surface*		get_texture(const std::string &filename);
+	std::vector<char>	load_data(const std::string &filename) const;
+	SDL_Surface*		load_texture(const std::string &filename) const;
 
 private:
 	std::map<std::string, std::vector<ResourceDefinition*>>	_resource_definitions;

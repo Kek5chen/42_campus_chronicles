@@ -42,7 +42,7 @@ void ResourceLoader::unload_resource_definitions(const std::string &package_file
 	}
 }
 
-std::vector<char> ResourceLoader::load_data(const std::string &filename) {
+std::vector<char> ResourceLoader::load_data(const std::string &filename) const {
 	std::ifstream		infile;
 	std::vector<char>	data;
 	ResourceDefinition	*def;
@@ -64,7 +64,7 @@ std::vector<char> ResourceLoader::load_data(const std::string &filename) {
 	return data;
 }
 
-SDL_Surface *ResourceLoader::get_texture(const std::string &filename)
+SDL_Surface *ResourceLoader::load_texture(const std::string &filename) const
 {
 	SDL_Surface	*surface;
 

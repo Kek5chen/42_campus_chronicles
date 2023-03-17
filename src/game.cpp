@@ -47,7 +47,7 @@ void Game::check_resource_loader() {
 			g_resource_loader = nullptr;
 			throw e;
 		}
-		testSurface = g_resource_loader->get_texture("assets/duck.png");
+		testSurface = g_resource_loader->load_texture("assets/duck.png");
 		if (!testSurface)
 			delete g_resource_loader;
 		SDL_DestroySurface(testSurface);

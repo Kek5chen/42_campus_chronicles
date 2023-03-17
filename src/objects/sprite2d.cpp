@@ -37,7 +37,7 @@ void Sprite2D::set_texture(const std::string &filename, ResourceLoader* resource
 {
 	if (!resourceLoader)
 		return;
-	set_texture(resourceLoader->get_texture(filename));
+	set_texture(resourceLoader->load_texture(filename));
 }
 
 void Sprite2D::draw()
