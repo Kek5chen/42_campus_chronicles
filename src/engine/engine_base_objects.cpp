@@ -1,4 +1,4 @@
-#include "engine.hpp"
+#include "engine/base_objects.hpp"
 
 
 /*
@@ -22,6 +22,10 @@ Vector2 Vector2::operator*(const Vector2& other) const {
 
 Vector2 Vector2::operator/(const Vector2& other) const {
 	return {this->x / other.x, this->y / other.y};
+}
+
+Vector2 Vector2::operator*(float scalar) const {
+    return {this->x * scalar, this->y * scalar};
 }
 
 float& Vector2::operator[](int index) {
@@ -56,6 +60,10 @@ Vector3 Vector3::operator/(const Vector3 &other) const {
 	return {this->x / other.x, this->y / other.y, this->z / other.z};
 }
 
+Vector3 Vector3::operator*(float scalar) const {
+    return {this->x * scalar, this->y * scalar, this->z * scalar};
+}
+
 float& Vector3::operator[](int index) {
     return (&x)[index];
 }
@@ -86,6 +94,10 @@ Vector4 Vector4::operator*(const Vector4 &other) const {
 
 Vector4 Vector4::operator/(const Vector4 &other) const {
 	return {this->x / other.x, this->y / other.y, this->z / other.z, this->w / other.w};
+}
+
+Vector4 Vector4::operator*(float scalar) const {
+    return {this->x * scalar, this->y * scalar, this->z * scalar, this->w * scalar};
 }
 
 float& Vector4::operator[](int index) {
