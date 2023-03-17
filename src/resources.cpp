@@ -42,10 +42,8 @@ void ResourceLoader::unload_resource_definitions(const std::string &package_file
 	}
 }
 
-SDL_Surface *ResourceLoader::get_texture(const std::string &filename)
-{
-	SDL_Surface	*surface;
-	std::ifstream	infile;
+std::vector<char> ResourceLoader::load_data(const std::string &filename) {
+	std::ifstream		infile;
 	std::vector<char>	data;
 	ResourceDefinition	*def;
 
@@ -61,9 +59,18 @@ SDL_Surface *ResourceLoader::get_texture(const std::string &filename)
 			data.resize(def->data_size);
 			infile.read(data.data(), def->data_size);
 			infile.close();
-			surface = IMG_Load_RW(SDL_RWFromMem(data.data(), (int) def->data_size), 1);
-			return surface;
 		}
 	}
-	return nullptr;
+	return data;
+}
+
+SDL_Surface *ResourceLoader::get_texture(const std::string &filename)
+{
+	SDL_Surface	*surface;
+
+	std::vector<char>	data = load_data(filename);
+	if (data.empty())
+		return nullptr;
+	surface = IMG_Load_RW(SDL_RWFromMem(data.data(), (int) data.size()), 1);
+	return surface;
 }
