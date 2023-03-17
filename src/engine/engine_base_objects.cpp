@@ -1,3 +1,4 @@
+#include <valarray>
 #include "engine/base_objects.hpp"
 
 
@@ -152,6 +153,15 @@ void Vector3::operator/=(float scalar) {
     this->z /= scalar;
 }
 
+float Vector3::magnitude() const {
+    return std::sqrt(this->x * this->x + this->y * this->y + this->z * this->z);
+}
+
+Vector3 Vector3::normalize() const {
+    float length = this->magnitude();
+    return {this->x / length, this->y / length, this->z / length};
+}
+
 
 /*
  * Vector 4 Implementations
@@ -253,6 +263,18 @@ Matrix4::Matrix4() {
             i[j] = 0;
         }
     }
+}
+
+Matrix4::Matrix4(float diagonal) {
+    for (auto& i : v) {
+        for (int j = 0; j < 4; j++) {
+            i[j] = 0;
+        }
+    }
+    v[0][0] = diagonal;
+    v[1][1] = diagonal;
+    v[2][2] = diagonal;
+    v[3][3] = diagonal;
 }
 
 Matrix4::Matrix4(Vector4 v0, Vector4 v1, Vector4 v2, Vector4 v3) : v{v0, v1, v2, v3} {}

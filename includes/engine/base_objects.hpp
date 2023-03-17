@@ -42,6 +42,9 @@ struct Vector3 {
     void            operator*=(float scalar);
     void            operator/=(float scalar);
 
+    float           magnitude() const;
+    Vector3         normalize() const;
+
 	float x, y, z;
 };
 
@@ -69,7 +72,8 @@ struct Vector4 {
 };
 
 struct Matrix4 {
-	Matrix4();
+    Matrix4();
+    explicit Matrix4(float diagonal);
 	Matrix4(Vector4 v0, Vector4 v1, Vector4 v2, Vector4 v3);
 
 	Vector4&		operator[](int index);
