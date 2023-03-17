@@ -1,4 +1,6 @@
 
+#include <algorithm>
+#include <charconv>
 #include "objects/wavefront.hpp"
 
 WaveFrontObject::WaveFrontObject(Game *game) : Object3D(game) { }
@@ -22,13 +24,31 @@ static std::vector<std::string_view>	parse_lines(const std::vector<char> &data) 
 
 static Vector3 parse_vertex(const std::string_view &line) {
 	Vector3 vertex;
-	sscanf(line.data(), "v %f %f %f", &vertex.x, &vertex.y, &vertex.z);
+	auto start = line.data() + 2;  // Skip the "v " at the beginning
+
+	for (float* coord : {&vertex.x, &vertex.y, &vertex.z}) {
+		start = std::find_if_not(start, line.data() + line.size(), [](unsigned char c) { return std::isspace(c); });
+		auto [ptr, err] = std::from_chars(start, line.data() + line.size(), *coord);
+		if (err != std::errc{}) {
+			throw std::runtime_error("Failed to parse vertex");
+		}
+		start = ptr;
+	}
 	return vertex;
 }
 
 static Vector3 parse_normal(const std::string_view &line) {
 	Vector3 normal;
-	sscanf(line.data(), "vn %f %f %f", &normal.x, &normal.y, &normal.z);
+	auto start = line.data() + 3;  // Skip the "vn " at the beginning
+
+	for (float* coord : {&normal.x, &normal.y, &normal.z}) {
+		start = std::find_if_not(start, line.data() + line.size(), [](unsigned char c) { return std::isspace(c); });
+		auto [ptr, err] = std::from_chars(start, line.data() + line.size(), *coord);
+		if (err != std::errc{}) {
+			throw std::runtime_error("Failed to parse vertex");
+		}
+		start = ptr;
+	}
 	return normal;
 }
 
