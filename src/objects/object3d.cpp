@@ -65,22 +65,6 @@ void Object3D::draw() {
 	});
 
 	for (const Triangle3& tri : projectedTriangles) {
-		Vector2 min_coords = tri.v[0];
-		Vector2 max_coords = tri.v[0];
-
-		for (int i = 1; i < 3; ++i) {
-			min_coords.x = std::min(min_coords.x, tri.v[i].x);
-			min_coords.y = std::min(min_coords.y, tri.v[i].y);
-			max_coords.x = std::max(max_coords.x, tri.v[i].x);
-			max_coords.y = std::max(max_coords.y, tri.v[i].y);
-		}
-
-		Vector2 triangleScreenSize;
-		triangleScreenSize.x = max_coords.x - min_coords.x;
-		triangleScreenSize.y = max_coords.y - min_coords.y;
-		if (triangleScreenSize.x < 1 || triangleScreenSize.y < 1)
-			continue;
-
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 		Vector3 centroid{};
 		for (auto normal : tri.normals)
