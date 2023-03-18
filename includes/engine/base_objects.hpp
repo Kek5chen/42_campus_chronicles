@@ -3,6 +3,7 @@
 struct Vector2;
 struct Vector3;
 struct Vector4;
+struct Matrix4;
 
 struct Vector2 {
 	Vector2() = default;
@@ -84,6 +85,7 @@ struct Vector4 {
     void            operator*=(float scalar);
     void            operator/=(float scalar);
 	Vector4			operator-() const;
+	Vector4 		operator*(const Matrix4& other) const;
 
 	float x = 0, y = 0, z = 0, w = 0;
 };

@@ -317,6 +317,14 @@ Vector4 Vector4::operator-() const {
 	return Vector4(-x, -y, -z, -w);
 }
 
+Vector4 Vector4::operator*(const Matrix4 &other) const {
+	Vector4 result;
+	for (int i = 0; i < 4; i++) {
+		result[i] = this->x * other[i][0] + this->y * other[i][1] + this->z * other[i][2] + this->w * other[i][3];
+	}
+	return result;
+}
+
 /*
  * Matrix 4 Implementations
  */
