@@ -82,7 +82,7 @@ void Vector2::operator/=(float scalar) {
 }
 
 float Vector2::magnitude() const {
-	return sqrt(x * x + y * y);
+	return std::sqrt(x * x + y * y);
 }
 
 Vector2 Vector2::normalize() const {
