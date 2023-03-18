@@ -370,3 +370,11 @@ Vector4 Matrix4::operator*(const Vector4 &other) const {
     }
     return result;
 }
+
+float Matrix4::determinant() {
+	float result = 0;
+	for (int i = 0; i < 4; i++) {
+		result += v[0][i] * (v[1][(i + 1) % 4] * v[2][(i + 2) % 4] * v[3][(i + 3) % 4] - v[1][(i + 3) % 4] * v[2][(i + 2) % 4] * v[3][(i + 1) % 4]);
+	}
+	return result;
+}
