@@ -1,4 +1,4 @@
-#include <valarray>
+#include <cmath>
 #include "engine/base_objects.hpp"
 
 
@@ -206,6 +206,10 @@ float Vector3::distance(const Vector3 &other) const {
 	return std::sqrt(dx * dx + dy * dy + dz * dz);
 }
 
+Vector3 Vector3::operator-() const {
+	return {-x, -y, -z};
+}
+
 
 /*
  * Vector 4 Implementations
@@ -309,6 +313,9 @@ void Vector4::operator/=(float scalar) {
     this->w /= scalar;
 }
 
+Vector4 Vector4::operator-() const {
+	return Vector4(-x, -y, -z, -w);
+}
 
 /*
  * Matrix 4 Implementations

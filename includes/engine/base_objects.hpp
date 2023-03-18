@@ -53,6 +53,7 @@ struct Vector3 {
     void            operator/=(const Vector3& other);
     void            operator*=(float scalar);
     void            operator/=(float scalar);
+	Vector3			operator-() const;
 
     float           magnitude() const;
     Vector3         normalize() const;
@@ -82,6 +83,7 @@ struct Vector4 {
     void            operator/=(const Vector4& other);
     void            operator*=(float scalar);
     void            operator/=(float scalar);
+	Vector4			operator-() const;
 
 	float x = 0, y = 0, z = 0, w = 0;
 };
