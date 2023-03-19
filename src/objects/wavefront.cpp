@@ -2,6 +2,7 @@
 #include <algorithm>
 #include <charconv>
 #include "objects/wavefront.hpp"
+#include "engine/exceptions/stackexception.hpp"
 
 WaveFrontObject::WaveFrontObject(Game *game) : Object3D(game) { }
 
@@ -30,7 +31,7 @@ static Vector3 parse_vertex(const std::string_view &line) {
 		start = std::find_if_not(start, line.data() + line.size(), [](unsigned char c) { return std::isspace(c); });
 		auto [ptr, err] = std::from_chars(start, line.data() + line.size(), *coord);
 		if (err != std::errc{}) {
-			throw std::runtime_error("Failed to parse vertex");
+			throw StackException("Failed to parse vertex");
 		}
 		start = ptr;
 	}
@@ -45,7 +46,7 @@ static Vector3 parse_normal(const std::string_view &line) {
 		start = std::find_if_not(start, line.data() + line.size(), [](unsigned char c) { return std::isspace(c); });
 		auto [ptr, err] = std::from_chars(start, line.data() + line.size(), *coord);
 		if (err != std::errc{}) {
-			throw std::runtime_error("Failed to parse vertex");
+			throw StackException("Failed to parse vertex");
 		}
 		start = ptr;
 	}

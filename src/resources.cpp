@@ -1,5 +1,6 @@
 #include <fstream>
 #include "resources.hpp"
+#include "engine/exceptions/stackexception.hpp"
 
 ResourceLoader::~ResourceLoader()
 {
@@ -17,7 +18,7 @@ void ResourceLoader::load_resource_definitions(const std::string &package_filena
 	ResourceDefinition	*def;
 
 	if(!infile.is_open())
-		throw std::runtime_error("Could not open resource package: " + package_filename);
+		throw StackException("Could not open resource package: " + package_filename);
 	if (_resource_definitions.find(package_filename) != _resource_definitions.end())
 		unload_resource_definitions(package_filename);
 	while (infile.good()) {
@@ -54,7 +55,7 @@ std::vector<char> ResourceLoader::load_data(const std::string &filename) const {
 			def = *it2;
 			infile.open(_resource_definition.first, std::ios::binary);
 			if (!infile.is_open())
-				throw std::runtime_error("Could not open resource package: " + _resource_definition.first);
+				throw StackException("Could not open resource package: " + _resource_definition.first);
 			infile.seekg(def->data_offset, std::ios::beg);
 			data.resize(def->data_size);
 			infile.read(data.data(), def->data_size);
