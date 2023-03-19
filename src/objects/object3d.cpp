@@ -75,7 +75,7 @@ void Object3D::draw() {
 		centroid /= 3.0f;
 		centroid = centroid.normalize();
 		SDL_Vertex vertices[3];
-		int gradient = (int)(((centroid.y + centroid.x) / 2 < 0 ? 0 : (centroid.y + centroid.x) / 2) * 230 + 25);
+		int gradient = (int)( std::abs(centroid.x) * 0.5 + (1.f - std::abs(centroid.y)) / 2 * 255);
 		for (int i = 0; i < 3; ++i) {
 			vertices[i].position.x = tri.v[i].x;
 			vertices[i].position.y = tri.v[i].y;

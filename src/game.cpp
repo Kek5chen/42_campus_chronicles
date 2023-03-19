@@ -2,6 +2,7 @@
 #include <algorithm>
 #include "game.hpp"
 #include "objects/player.hpp"
+#include "objects/wavefront.hpp"
 
 ResourceLoader	*g_resource_loader;
 
@@ -13,21 +14,11 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 		this->close();
 		return;
 	}
-	Object3D *obj = new Object3D(this);
-	obj->add_triangle({{{-.05f, .05f, -0.05},
-						{.05f, 0.f, -0.05},
-						{-.05f, -.05f, -0.05}}});
-	obj->add_triangle({{{-.05f, .05f, -0.05},
-						{0.f, 0.f, .05f},
-						{-.05f, -.05f, -0.05}}});
-	obj->add_triangle({{{0.f, 0.f, .05f},
-						{.05f, 0.f, -0.05},
-						{-.05f, -.05f, -0.05}}});
-	obj->add_triangle({{{-.05f, .05f, -0.05},
-						{.05f, 0.f, -0.05},
-						{0.f, 0.f, .05f}}});
-	obj->pos = {0, 0, -60};
-	this->add_object(obj);
+	auto deer = new WaveFrontObject(this);
+	deer->load_obj(g_resource_loader, "assets/deer_gpl.obj");
+	deer->pos = {-6.5f, 0, -2000};
+	deer->set_rotation(30, 0, 0);
+	this->add_object(deer);
 }
 
 Game::~Game() {
