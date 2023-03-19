@@ -6,7 +6,7 @@
 
 class StackException : public std::exception {
 public:
-	explicit StackException(const char* message);
+	explicit StackException(std::string  message);
 	~StackException() override = default;
 
 	std::string get_stack_trace() const;

@@ -3,8 +3,9 @@
 #include "engine/exceptions/stackexception.hpp"
 #include <execinfo.h>
 #include <sstream>
+#include <utility>
 
-StackException::StackException(const char* message) : _message(message) {
+StackException::StackException(std::string message) : _message(std::move(message)) {
 #ifdef __linux__
 	void *array[128];
 	int size = backtrace(array, 128);
