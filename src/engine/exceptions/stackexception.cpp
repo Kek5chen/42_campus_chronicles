@@ -24,6 +24,6 @@ StackException::StackException(const std::string& message) : std::runtime_error(
 #endif
 }
 
-std::string StackException::get_stack_trace() const {
+const std::string& StackException::get_stack_trace() const {
 	return this->_stack_trace;
 }
