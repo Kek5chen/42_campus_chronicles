@@ -5,7 +5,7 @@
 #include <sstream>
 #include <utility>
 
-StackException::StackException(std::string message) : _message(std::move(message)) {
+StackException::StackException(const std::string& message) : std::runtime_error(message) {
 #ifdef __linux__
 	void *array[128];
 	int size = backtrace(array, 128);
@@ -26,8 +26,4 @@ StackException::StackException(std::string message) : _message(std::move(message
 
 std::string StackException::get_stack_trace() const {
 	return this->_stack_trace;
-}
-
-const char *StackException::what() const noexcept {
-	return this->_message.c_str();
 }
