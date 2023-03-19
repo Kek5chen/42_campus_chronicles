@@ -42,10 +42,9 @@ void Game::check_resource_loader() {
 		g_resource_loader = new ResourceLoader();
 		try {
 			g_resource_loader->load_resource_definitions("resources.42CC");
-		} catch (std::runtime_error &e) {
+		} catch (std::exception &e) {
 			delete g_resource_loader;
 			g_resource_loader = nullptr;
-			throw e;
 		}
 		testSurface = g_resource_loader->load_texture("assets/duck.png");
 		if (!testSurface)
