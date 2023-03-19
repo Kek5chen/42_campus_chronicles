@@ -28,6 +28,10 @@ else()
 	find_package(SDL3_image REQUIRED CONFIG REQUIRED COMPONENTS SDL3_image)
 endif()
 
+if (CMAKE_BUILD_TYPE STREQUAL "Debug")
+	add_compile_definitions(DEBUG)
+endif()
+
 # Build the resource compiler in build-tools/42cc_resource_compiler.cpp into build-tools/42cc_resource_compiler
 # and use it to compile the resources into a .42CC file
 set(ASSETS assets/duck.png)
