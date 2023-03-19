@@ -2,11 +2,6 @@
 #include <sstream>
 #include "game.hpp"
 #include "engine/exceptions/stackexception.hpp"
-#include <stacktrace>
-
-/* Sets constants */
-// #define WIDTH 800
-// #define HEIGHT 600
 
 
 int main (int argc, char **argv)

@@ -3,7 +3,6 @@
 #include "engine/exceptions/stackexception.hpp"
 #include <execinfo.h>
 #include <sstream>
-#include <utility>
 
 StackException::StackException(const std::string& message) : std::runtime_error(message) {
 #ifdef __linux__
