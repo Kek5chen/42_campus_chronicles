@@ -1,0 +1,14 @@
+/*
+* File: RESOURCEINFO.txt
+* Author: Kek5chen (kx@imkx.dev)
+* Date Created: 23.03.2023
+*
+* This file contains a list of all the asset files in the project, along with their source information,
+* licensing rights, and owner contact information. It is intended to help ensure that the project complies with
+* GPL licensing requirements and that the proper attribution is given to the owners of the assets.
+*/
+
+ASSET: assets/deer_gpl.obj
+SOURCE: Kek5chen (kx@imkx.dev)
+LICENSE: GPL
+OWNER: Kek5chen (kx@imkx.dev)
