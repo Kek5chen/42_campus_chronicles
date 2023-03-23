@@ -16,7 +16,7 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 	}
 	auto deer = new WaveFrontObject(this);
 	deer->load_obj(g_resource_loader, "assets/deer_gpl.obj");
-	deer->pos = {-6.5f, 0, -2000};
+	deer->pos = {0, 0, -2000};
 	deer->set_rotation(30, 0, 0);
 	this->add_object(deer);
 }
