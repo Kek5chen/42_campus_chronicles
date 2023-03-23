@@ -62,7 +62,7 @@ std::vector<char> ResourceLoader::load_data(const std::string &filename) const {
 	return data;
 }
 
-std::shared_ptr<SDL_Surface> ResourceLoader::load_texture(const std::string& filename) const
+SurfacePtr ResourceLoader::load_texture(const std::string& filename) const
 {
 	std::vector<char> data = load_data(filename);
 	if (data.empty())

@@ -24,7 +24,7 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 Game::~Game() = default;
 
 void Game::check_resource_loader() {
-	std::shared_ptr<SDL_Surface> testSurface;
+	SurfacePtr testSurface;
 
 	if (g_resource_loader == nullptr) {
 		g_resource_loader = std::make_unique<ResourceLoader>();

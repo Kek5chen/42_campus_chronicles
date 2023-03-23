@@ -10,4 +10,9 @@
 #else
 # include <SDL.h>
 # include <SDL_image.h>
+#include <memory>
+
 #endif
+
+using SurfacePtr = std::shared_ptr<SDL_Surface>;
+using TexturePtr = std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)>;

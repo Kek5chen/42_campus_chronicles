@@ -19,15 +19,15 @@ void Sprite2D::set_rotation(double rotation)
 	this->_rotation = rotation;
 }
 
-void Sprite2D::set_texture(const std::shared_ptr<SDL_Surface>& surface)
+void Sprite2D::set_texture(const SurfacePtr& surface)
 {
 	if (!surface)
 		return;
 	this->_surface = surface;
 	this->_size.x = static_cast<float>(this->_surface->w) / 4;
 	this->_size.y = static_cast<float>(this->_surface->h) / 4;
-	std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)> texture(
-			SDL_CreateTextureFromSurface(this->_game->get_renderer().lock().get(), this->_surface.get()), SDL_DestroyTexture);
+	TexturePtr texture(SDL_CreateTextureFromSurface(this->_game->get_renderer().lock().get(), this->_surface.get()),
+					   SDL_DestroyTexture);
 	this->_texture = std::move(texture);
 
 }

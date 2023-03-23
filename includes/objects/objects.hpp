@@ -16,7 +16,7 @@ public:
 
 	virtual void	set_size(float width, float height);
 	virtual void	set_rotation(double rotation);
-	virtual void	set_texture(const std::shared_ptr<SDL_Surface>& surface);
+	virtual void	set_texture(const SurfacePtr& surface);
 	virtual void	set_texture(const std::string& filename, const std::weak_ptr<ResourceLoader>& resourceLoader);
 
 	void			draw() override;
@@ -28,8 +28,8 @@ protected:
 	Game*				_game = nullptr;
 
 private:
-	std::shared_ptr<SDL_Surface>								_surface = nullptr;
-	std::unique_ptr<SDL_Texture, decltype(&SDL_DestroyTexture)>	_texture = {nullptr, SDL_DestroyTexture};
+	SurfacePtr	_surface = nullptr;
+	TexturePtr	_texture = {nullptr, SDL_DestroyTexture};
 
 };
 
