@@ -30,7 +30,7 @@ void Object3D::update() {}
 void Object3D::draw() {
     if (!this->_game)
         return;
-    SDL_Renderer* renderer = this->_game->get_renderer();
+    auto renderer = this->_game->get_renderer();
 	Vector2 screenSize = {(float)this->_game->get_width(), (float)this->_game->get_height()};
 
     float fov = math::radians(90);
@@ -68,7 +68,7 @@ void Object3D::draw() {
 		for (auto& i: tri.v) {
 			i = math::point_to_screen((Vector3 &) i, projectionMatrix, screenSize);
 		}
-		SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+		SDL_SetRenderDrawColor(renderer.lock().get(), 255, 255, 255, 255);
 		Vector3 centroid{};
 		for (auto normal : tri.normals)
 			centroid += normal;
@@ -85,6 +85,6 @@ void Object3D::draw() {
 			vertices[i].color.a = 255;
 		}
 		int indices[3] = {2, 1, 0};
-		SDL_RenderGeometry(renderer, 0, vertices, 3, indices, 3);
+		SDL_RenderGeometry(renderer.lock().get(), nullptr, vertices, 3, indices, 3);
     }
 }

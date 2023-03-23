@@ -93,7 +93,7 @@ static Triangle3 parse_triangle(const std::string_view& line, const std::vector<
 	return triangle;
 }
 
-void WaveFrontObject::load_obj(std::vector<char>& data) {
+void WaveFrontObject::load_obj(const std::vector<char>& data) {
 	if (data.empty())
 		return;
 
@@ -112,8 +112,8 @@ void WaveFrontObject::load_obj(std::vector<char>& data) {
 	}
 }
 
-void WaveFrontObject::load_obj(const ResourceLoader *resourceLoader, const std::string &filename) {
-	std::vector<char> data = resourceLoader->load_data(filename);
+void WaveFrontObject::load_obj(const std::weak_ptr<ResourceLoader>& resourceLoader, const std::string &filename) {
+	std::vector<char> data = resourceLoader.lock()->load_data(filename);
 
 	load_obj(data);
 }

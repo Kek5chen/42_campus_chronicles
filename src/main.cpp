@@ -4,6 +4,8 @@
 
 int main (int argc, char **argv)
 {
+	(void)argc;
+	(void)argv;
 	register_signal_handler();
 	Game new_game;
 	new_game.loop();

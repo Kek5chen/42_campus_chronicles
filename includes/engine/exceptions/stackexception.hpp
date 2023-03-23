@@ -9,7 +9,7 @@ public:
 	explicit StackException(const std::string&  message);
 	~StackException() override = default;
 
-	const std::string& get_stack_trace() const;
+	[[nodiscard]] const std::string&	get_stack_trace() const;
 
 private:
 	std::string _stack_trace;

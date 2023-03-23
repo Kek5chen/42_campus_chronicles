@@ -20,17 +20,11 @@ public:
 	Window(std::string title, int width, int height);
 	~Window();
 
-	bool			is_closed() const;
 	void			poll_events();
 	void			prepare_scene();
 	virtual void	draw_scene();
 	void			present_scene();
-	SDL_Renderer	*get_renderer() const;
 	void 			set_title(std::string title);
-	int				get_width() const;
-	int				get_height() const;
-	int				get_x() const;
-	int				get_y() const;
 	void			set_position(int x, int y);
 	void			set_size(int width, int height);
 	bool			is_key_down(SDL_Scancode key);
@@ -38,17 +32,25 @@ public:
 	bool			is_key_released(SDL_Scancode key);
 	void			close();
 
-private:
-	bool 			init();
+	[[nodiscard]] bool							is_closed() const;
+	[[nodiscard]] std::weak_ptr<SDL_Renderer>	get_renderer() const;
+	[[nodiscard]] int							get_width() const;
+	[[nodiscard]] int							get_height() const;
+	[[nodiscard]] int							get_x() const;
+	[[nodiscard]] int							get_y() const;
 
-	std::string 	_title;
-	int				_width;
-	int				_height;
-	int				_x{};
-	int				_y{};
-	bool 			_closed = false;
-	SDL_Window		*_window = nullptr;
-	SDL_Renderer	*_renderer = nullptr;
-	bool			_key_states_changed{};
-	KeyState		_key_states[SDL_NUM_SCANCODES]{};
+private:
+	bool	init();
+
+	std::string 					_title;
+	int								_width;
+	int								_height;
+	int								_x{};
+	int								_y{};
+	bool 							_closed = false;
+	std::shared_ptr<SDL_Window>		_window = nullptr;
+	std::shared_ptr<SDL_Renderer>	_renderer = nullptr;
+	bool							_key_states_changed{};
+	KeyState						_key_states[SDL_NUM_SCANCODES]{};
+
 };

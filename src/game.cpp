@@ -4,7 +4,7 @@
 #include "objects/player.hpp"
 #include "objects/wavefront.hpp"
 
-ResourceLoader	*g_resource_loader;
+std::shared_ptr<ResourceLoader> g_resource_loader;
 
 Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 	try {
@@ -14,33 +14,28 @@ Game::Game(): Window(TITLE, WINDOW_WIDTH, WINDOW_HEIGHT) {
 		this->close();
 		return;
 	}
-	auto deer = new WaveFrontObject(this);
+	auto deer = std::make_unique<WaveFrontObject>(this);
 	deer->load_obj(g_resource_loader, "assets/deer_gpl.obj");
 	deer->pos = {0, 0, -2000};
 	deer->set_rotation(30, 0, 0);
-	this->add_object(deer);
+	this->add_object(std::move(deer));
 }
 
-Game::~Game() {
-	for (auto & _object : this->_objects)
-		delete _object;
-}
+Game::~Game() = default;
 
 void Game::check_resource_loader() {
-	SDL_Surface	*testSurface;
+	std::shared_ptr<SDL_Surface> testSurface;
 
 	if (g_resource_loader == nullptr) {
-		g_resource_loader = new ResourceLoader();
+		g_resource_loader = std::make_unique<ResourceLoader>();
 		try {
 			g_resource_loader->load_resource_definitions("resources.42CC");
 		} catch (std::exception &e) {
-			delete g_resource_loader;
-			g_resource_loader = nullptr;
+			g_resource_loader.reset();
 		}
 		testSurface = g_resource_loader->load_texture("assets/duck.png");
 		if (!testSurface)
-			delete g_resource_loader;
-		SDL_DestroySurface(testSurface);
+			g_resource_loader.reset();
 	}
 }
 
@@ -55,19 +50,20 @@ void Game::draw_scene() {
 		(*it)->draw();
 }
 
-void Game::add_object(Object* object)
+void Game::add_object(std::unique_ptr<Object> object)
 {
 	for (auto it = this->_objects.begin(); it != this->_objects.end(); it++) {
 		if ((*it)->pos.z > object->pos.z) {
-			this->_objects.insert(it, object);
+			this->_objects.insert(it, std::move(object));
 			return;
 		}
 	}
-	this->_objects.push_back(object);
+	this->_objects.push_back(std::move(object));
 }
 
-void Game::remove_object(Object *object) {
-	auto it = std::find(this->_objects.begin(), this->_objects.end(), object);
+void Game::remove_object(std::unique_ptr<Object>& object) {
+	auto it = std::find_if(this->_objects.begin(), this->_objects.end(),
+						   [&](const std::unique_ptr<Object>& o) { return o.get() == object.get(); });
 	if (it != this->_objects.end())
 		this->_objects.erase(it);
 }

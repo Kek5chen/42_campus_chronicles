@@ -7,8 +7,8 @@ public:
 	explicit WaveFrontObject(Game* game);
 	~WaveFrontObject() override = default;
 
-	void	load_obj(std::vector<char>& data);
-	void	load_obj(const ResourceLoader* resourceLoader, const std::string &filename);
+	void	load_obj(const std::vector<char>& data);
+	void	load_obj(const std::weak_ptr<ResourceLoader>& resourceLoader, const std::string &filename);
 
 	void	update() override;
 

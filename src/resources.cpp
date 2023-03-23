@@ -14,33 +14,30 @@ ResourceLoader::~ResourceLoader()
  */
 void ResourceLoader::load_resource_definitions(const std::string &package_filename)
 {
-	std::ifstream	infile(package_filename, std::ios::binary);
-	ResourceDefinition	*def;
+	std::ifstream						infile(package_filename, std::ios::binary);
+	std::unique_ptr<ResourceDefinition>	def;
 
 	if(!infile.is_open())
 		throw StackException("Could not open resource package: " + package_filename);
 	if (_resource_definitions.find(package_filename) != _resource_definitions.end())
 		unload_resource_definitions(package_filename);
 	while (infile.good()) {
-		def = new ResourceDefinition();
+		def = std::make_unique<ResourceDefinition>();
 		infile.read((char*)&def->data_size, 8);
 		infile.seekg(1, std::ios::cur);
 		std::getline(infile, def->path, '\0');
 		def->data_offset = ((long long) infile.tellg());
-		this->_resource_definitions[package_filename].push_back(def);
 		infile.seekg(def->data_size, std::ios::cur);
 		infile.seekg(1, std::ios::cur);
+		this->_resource_definitions[package_filename].push_back(std::move(def));
 	}
 	infile.close();
 }
 
 void ResourceLoader::unload_resource_definitions(const std::string &package_filename)
 {
-	if (_resource_definitions.find(package_filename) != _resource_definitions.end()) {
-		for (auto& it : _resource_definitions[package_filename])
-			delete it;
+	if (_resource_definitions.find(package_filename) != _resource_definitions.end())
 		_resource_definitions.erase(package_filename);
-	}
 }
 
 std::vector<char> ResourceLoader::load_data(const std::string &filename) const {
@@ -52,7 +49,7 @@ std::vector<char> ResourceLoader::load_data(const std::string &filename) const {
 		for (auto it2 = _resource_definition.second.begin(); it2 != _resource_definition.second.end(); ++it2) {
 			if ((*it2)->path != filename)
 				continue;
-			def = *it2;
+			def = it2->get();
 			infile.open(_resource_definition.first, std::ios::binary);
 			if (!infile.is_open())
 				throw StackException("Could not open resource package: " + _resource_definition.first);
@@ -65,13 +62,16 @@ std::vector<char> ResourceLoader::load_data(const std::string &filename) const {
 	return data;
 }
 
-SDL_Surface *ResourceLoader::load_texture(const std::string &filename) const
+std::shared_ptr<SDL_Surface> ResourceLoader::load_texture(const std::string& filename) const
 {
-	SDL_Surface	*surface;
-
-	std::vector<char>	data = load_data(filename);
+	std::vector<char> data = load_data(filename);
 	if (data.empty())
 		return nullptr;
-	surface = IMG_Load_RW(SDL_RWFromMem(data.data(), (int) data.size()), 1);
-	return surface;
+
+	SDL_RWops* rw = SDL_RWFromMem(data.data(), static_cast<int>(data.size()));
+	SDL_Surface* surface = IMG_Load_RW(rw, 1);
+	if (!surface)
+		return nullptr;
+
+	return {surface, [](SDL_Surface* p) { SDL_DestroySurface(p); }};
 }

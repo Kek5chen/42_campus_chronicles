@@ -8,7 +8,8 @@ Window::Window(std::string title, int width, int height) : _title(std::move(titl
 }
 
 Window::~Window() {
-	SDL_DestroyWindow(this->_window);
+	this->_window.reset();
+	this->_renderer.reset();
 	SDL_Quit();
 }
 
@@ -20,27 +21,27 @@ bool Window::init() {
 		return false;
 	}
 
-	this->_window = SDL_CreateWindow(this->_title.c_str(),
+	this->_window.reset(SDL_CreateWindow(this->_title.c_str(),
 									 SDL_WINDOWPOS_CENTERED,
 									 SDL_WINDOWPOS_CENTERED,
 									 this->_width,
 									 this->_height,
 									 SDL_WINDOW_RESIZABLE
-									);
+									), SDL_DestroyWindow);
 	if (!this->_window) {
 		std::cerr << "Failed to create window\n";
 		return false;
 	}
-	SDL_GetWindowPosition(this->_window, &_x, &_y);
+	SDL_GetWindowPosition(this->_window.get(), &_x, &_y);
 
-	this->_renderer = SDL_CreateRenderer(this->_window, nullptr,
-										 SDL_RENDERER_ACCELERATED);
+	this->_renderer.reset(SDL_CreateRenderer(this->_window.get(), nullptr,
+										 SDL_RENDERER_ACCELERATED), SDL_DestroyRenderer);
 	if (!this->_renderer) {
 		std::cerr << "Failed to create renderer\n";
 		return false;
 	}
 
-	SDL_SetRenderVSync(_renderer, 1);
+	SDL_SetRenderVSync(this->_renderer.get(), 1);
 	return true;
 }
 
@@ -75,8 +76,8 @@ void Window::poll_events() {
 }
 
 void Window::prepare_scene() {
-	SDL_SetRenderDrawColor(this->_renderer, 0, 0, 0, 255);
-	SDL_RenderClear(this->_renderer);
+	SDL_SetRenderDrawColor(this->_renderer.get(), 0, 0, 0, 255);
+	SDL_RenderClear(this->_renderer.get());
 	if (this->_key_states_changed) {
 		for (auto &key_state: this->_key_states)
 			key_state.changed = false;
@@ -87,10 +88,10 @@ void Window::prepare_scene() {
 void Window::draw_scene() {}
 
 void Window::present_scene() {
-	SDL_RenderPresent(this->_renderer);
+	SDL_RenderPresent(this->_renderer.get());
 }
 
-SDL_Renderer* Window::get_renderer() const
+std::weak_ptr<SDL_Renderer>	Window::get_renderer() const
 {
 	return this->_renderer;
 }
@@ -98,7 +99,7 @@ SDL_Renderer* Window::get_renderer() const
 void Window::set_title(std::string title)
 {
 	this->_title = std::move(title);
-	SDL_SetWindowTitle(this->_window, this->_title.c_str());
+	SDL_SetWindowTitle(this->_window.get(), this->_title.c_str());
 }
 
 int Window::get_width() const {
@@ -120,13 +121,13 @@ int Window::get_y() const {
 void Window::set_position(int x, int y) {
 	this->_x = x;
 	this->_y = y;
-	SDL_SetWindowPosition(this->_window, this->_x, this->_y);
+	SDL_SetWindowPosition(this->_window.get(), this->_x, this->_y);
 }
 
 void Window::set_size(int width, int height) {
 	this->_width = width;
 	this->_height = height;
-	SDL_SetWindowSize(this->_window, this->_width, this->_height);
+	SDL_SetWindowSize(this->_window.get(), this->_width, this->_height);
 }
 
 bool Window::is_key_down(SDL_Scancode key) {

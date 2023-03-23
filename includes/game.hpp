@@ -6,7 +6,7 @@
 #include "objects/objects.hpp"
 #include "engine/base_objects.hpp"
 
-extern	ResourceLoader	*g_resource_loader;
+extern std::shared_ptr<ResourceLoader> g_resource_loader;
 
 class Camera {
 public:
@@ -20,8 +20,8 @@ public:
 
 	void	update_scene();
 	void	draw_scene() override;
-	void 	add_object(Object *object);
-	void 	remove_object(Object *object);
+	void 	add_object(std::unique_ptr<Object> object);
+	void	remove_object(std::unique_ptr<Object>& object);
 	void	loop();
 
 	Camera	camera;
@@ -31,5 +31,5 @@ private:
 
 	void	update_camera();
 
-	std::vector<Object*>		_objects;
+	std::vector<std::unique_ptr<Object>>		_objects;
 };
