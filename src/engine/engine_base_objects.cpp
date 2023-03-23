@@ -314,7 +314,7 @@ void Vector4::operator/=(float scalar) {
 }
 
 Vector4 Vector4::operator-() const {
-	return Vector4(-x, -y, -z, -w);
+	return {-x, -y, -z, -w};
 }
 
 Vector4 Vector4::operator*(const Matrix4 &other) const {
