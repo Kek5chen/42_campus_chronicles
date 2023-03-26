@@ -1,0 +1,22 @@
+name: CMake Build
+
+on:
+  create:
+    tags:
+      - '*'
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build
+      run: |
+        mkdir build && cd build
+        cmake ..
+        make
