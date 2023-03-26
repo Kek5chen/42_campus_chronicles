@@ -15,7 +15,7 @@ struct ResourceDefinition {
 class ResourceLoader {
 public:
 	ResourceLoader() = default;
-	~ResourceLoader();
+	~ResourceLoader() = default;
 
 	void							load_resource_definitions(const std::string &package_filename);
 	void 							unload_resource_definitions(const std::string &package_filename);

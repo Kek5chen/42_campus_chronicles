@@ -2,12 +2,6 @@
 #include "resources.hpp"
 #include "engine/exceptions/stackexception.hpp"
 
-ResourceLoader::~ResourceLoader()
-{
-	for (auto& _resource_definition : _resource_definitions)
-		unload_resource_definitions(_resource_definition.first);
-}
-
 /*
  * .42CC Resource Format will be defined like the following:
  * [DataSize:8] 0x00 [PathName:-] 0x00 [Data:-] 0x00 ....
