@@ -5,6 +5,8 @@
 #else
 # include <SDL.h>
 # include <SDL_image.h>
+#endif
+
 #include <memory>
 
 #define TITLE "42 Campus Chronicles"
