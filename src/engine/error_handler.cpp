@@ -21,7 +21,8 @@ static void print_stack_trace() {
 	std::cerr << oss.str() << std::endl;
 	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", oss.str().c_str(), nullptr);
 }
-#elifdef __WINDOWS__
+#else
+#ifdef __WINDOWS__
 // TODO: some windows user please implement this
 static void print_stack_trace() {
 	std::ostringstream oss;
@@ -29,6 +30,7 @@ static void print_stack_trace() {
 	std::cerr << oss.str() << std::endl;
 	SDL_ShowSimpleMessageBox(SDL_MESSAGEBOX_ERROR, "Error", oss.str().c_str(), nullptr);
 }
+#endif
 #endif
 
 static void signal_handler(int signal) {
