@@ -12,9 +12,7 @@ option(42CC_VENDORED "Use vendored libraries" ON)
 # No shared libs as we only static build
 set(BUILD_SHARED_LIBS OFF)
 if (WIN32)
-	set(OUT_DIR "${CMAKE_BINARY_DIR}/$<CONFIG>")
-else()
-	set(OUT_DIR "${CMAKE_BINARY_DIR}")
+	set(FILETYPE ".exe")
 endif()
 
 # add the SDL2 and SDL2_image libraries to the project if the 42CC_VENDORED option is set to ON
@@ -32,6 +30,7 @@ if (CMAKE_BUILD_TYPE STREQUAL "Debug")
 	add_compile_definitions(DEBUG)
 endif()
 
+
 # Build the resource compiler in build-tools/42cc_resource_compiler.cpp into build-tools/42cc_resource_compiler
 # and use it to compile the resources into a .42CC file
 set(ASSETS assets/duck.png assets/deer_gpl.obj)
@@ -39,7 +38,7 @@ add_executable(42cc_resource_compiler build-tools/42cc_resource_compiler.cpp)
 add_custom_command(
 		OUTPUT ${OUT_DIR}/resources.42CC
 		WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-		COMMAND ${OUT_DIR}/42cc_resource_compiler ${ASSETS} ${OUT_DIR}/resources.42CC
+		COMMAND ${CMAKE_BINARY_DIR}/42cc_resource_compiler${FILETYPE} ${ASSETS} ${CMAKE_BINARY_DIR}/resources.42CC
 		DEPENDS 42cc_resource_compiler
 		COMMENT "Compiling resources"
 		VERBATIM
