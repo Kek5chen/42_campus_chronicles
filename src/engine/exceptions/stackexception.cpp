@@ -2,10 +2,12 @@
 #include <iostream>
 #include "engine/exceptions/stackexception.hpp"
 #include <sstream>
+#ifdef __linux__
+#include <execinfo.h>
+#endif
 
 StackException::StackException(const std::string& message) : std::runtime_error(message) {
 #ifdef __linux__
-#include <execinfo.h>
 	void *array[128];
 	int size = backtrace(array, 128);
 	std::unique_ptr<char*, decltype(&std::free)> strings(backtrace_symbols(array, size), &std::free);
