@@ -48,8 +48,8 @@ void Object3D::draw() {
 	modelTranslationMatrix = math::translate(modelTranslationMatrix, this->_game->camera.pos);
     Matrix4 projectionMatrix = math::perspective(fov, aspect, near, far);
 
-	std::vector<Triangle3> projectedTriangles;
-    for (const Triangle3& tri : _triangles) {
+	std::vector<Triangle3> projectedTriangles(_triangles.size());
+	std::transform(std::execution::par, _triangles.begin(), _triangles.end(), projectedTriangles.begin(), [&](Triangle3& tri) {
 		Triangle3 projectedTriangle = tri;
 		for (auto& i: projectedTriangle.v) {
 			Vector4 transformedVertex = modelMatrix * Vector4(i, 1.0f);
@@ -59,8 +59,8 @@ void Object3D::draw() {
 		projectedTriangle.normals[0] = tri.normals[0];
 		projectedTriangle.normals[1] = tri.normals[1];
 		projectedTriangle.normals[2] = tri.normals[2];
-		projectedTriangles.push_back(projectedTriangle);
-	}
+		return projectedTriangle;
+	});
 	std::sort(std::execution::seq, projectedTriangles.begin(), projectedTriangles.end(), [](const Triangle3& a, const Triangle3& b) {
 		return a.v->z < b.v->z;
 	});
