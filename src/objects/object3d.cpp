@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <execution>
 #include "objects/objects.hpp"
 #include "game.hpp"
 #include "engine/math.hpp"
@@ -60,7 +61,7 @@ void Object3D::draw() {
 		projectedTriangle.normals[2] = tri.normals[2];
 		projectedTriangles.push_back(projectedTriangle);
 	}
-	std::sort(projectedTriangles.begin(), projectedTriangles.end(), [](const Triangle3& a, const Triangle3& b) {
+	std::sort(std::execution::seq, projectedTriangles.begin(), projectedTriangles.end(), [](const Triangle3& a, const Triangle3& b) {
 		return a.v->z < b.v->z;
 	});
 
