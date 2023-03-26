@@ -30,7 +30,6 @@ protected:
 private:
 	SurfacePtr	_surface = nullptr;
 	TexturePtr	_texture = {nullptr, SDL_DestroyTexture};
-
 };
 
 class Object3D : public Object {
@@ -53,5 +52,4 @@ protected:
 	Game*	_game = nullptr;
 
 	std::vector<Triangle3>	_triangles;
-
 };

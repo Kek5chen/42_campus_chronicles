@@ -103,7 +103,6 @@ struct Matrix4 {
 	float determinant();
 
 	Vector4	v[4];
-
 };
 
 struct Object {

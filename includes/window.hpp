@@ -52,5 +52,4 @@ private:
 	std::shared_ptr<SDL_Renderer>	_renderer = nullptr;
 	bool							_key_states_changed{};
 	KeyState						_key_states[SDL_NUM_SCANCODES]{};
-
 };

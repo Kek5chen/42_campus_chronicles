@@ -1,45 +1,45 @@
 # 0.1.1
 # Added
 
-    Implemented better global uncaught exception handler.
-    Added a file to attribute the assets to their owners.
-    Added global exception handler.
-    Added Linux stack exception class.
-    Added Vector3 and Vector4 negate operator.
-    Added function to get Matrix4 determinant.
-    Added vector4 multiply by matrix operator.
+- Implemented better global uncaught exception handler.
+- Added a file to attribute the assets to their owners.
+- Added global exception handler.
+- Added Linux stack exception class.
+- Added Vector3 and Vector4 negate operator.
+- Added function to get Matrix4 determinant.
+- Added vector4 multiply by matrix operator.
 
 # Changed
 
-    Refactored to use transform instead of foreach.
-    Switched to StackException for more clarity.
-    Refactored to use using for some cleaner types.
-    Don't repeat the return type.
-    Moved time logging debug function into own header.
+- Refactored to use transform instead of foreach.
+- Switched to StackException for more clarity.
+- Refactored to use using for some cleaner types.
+- Don't repeat the return type.
+- Moved time logging debug function into own header.
 
 # Fixed
 
-    Centered new deer test obj.
-    Catch exception instead of runtime_error.
-    Use std templated sqrt instead of c sqrt.
-    Fixed spelling in README.
+- Centered new deer test obj.
+- Catch exception instead of runtime_error.
+- Use std templated sqrt instead of c sqrt.
+- Fixed spelling in README.
 
 # Removed
 
-    Removed unneeded comment, wrong import and unused import.
+- Removed unneeded comment, wrong import and unused import.
 
 # Performance
 
-    Improved runtime of triangle projection by 87.5%.
-    Improved runtime of triangle sorting by 75.69%.
+- Improved runtime of triangle projection by 87.5%.
+- Improved runtime of triangle sorting by 75.69%.
 
 # Miscellaneous
 
-    Switched to C++ 20, was 17.
-    Made StackExceptions get_stack_trace return a constant string reference instead of a string copy.
-    Made StackException a runtime_error instead of an exception.
-    Updated demo with 3D model.
+- Switched to C++ 20, was 17.
+- Made StackExceptions get_stack_trace return a constant string reference instead of a string copy.
+- Made StackException a runtime_error instead of an exception.
+- Updated demo with 3D model.
 
 # License
 
-    Updated LICENSE.
+- Updated LICENSE.

@@ -15,5 +15,4 @@ public:
 private:
 	std::vector<Vector3>	_vertices;
 	std::vector<Vector3>	_normals;
-
 };

@@ -13,5 +13,4 @@ public:
 
 private:
 	std::string _stack_trace;
-
 };

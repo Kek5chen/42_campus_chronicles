@@ -29,7 +29,6 @@ void Sprite2D::set_texture(const SurfacePtr& surface)
 	TexturePtr texture(SDL_CreateTextureFromSurface(this->_game->get_renderer().lock().get(), this->_surface.get()),
 					   SDL_DestroyTexture);
 	this->_texture = std::move(texture);
-
 }
 
 void Sprite2D::set_texture(const std::string& filename, const std::weak_ptr<ResourceLoader>& resourceLoader)
