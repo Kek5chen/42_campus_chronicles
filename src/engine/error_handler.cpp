@@ -1,5 +1,4 @@
 #include <iostream>
-#include <execinfo.h>
 #include <memory>
 #include <sstream>
 #include <csignal>
@@ -7,6 +6,7 @@
 #include "SDL_messagebox.h"
 
 #if defined(__linux__) || defined(__APPLE__)
+#include <execinfo.h>
 static void print_stack_trace() {
 	std::ostringstream oss;
 	void *array[128];
