@@ -20,6 +20,15 @@ jobs:
     - name: Pull & update submodules recursively
       run: |
         git submodule update --init --recursive
+    - name: Install dependencies (ubuntu)
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt-get update -y
+        sudo apt-get install -y libtbb-dev
+    - name: Install dependencies (macOS)
+      if: matrix.os == 'macOS-latest'
+      run: |
+        brew install tbb
     - name: Build
       run: |
         cmake -B build
