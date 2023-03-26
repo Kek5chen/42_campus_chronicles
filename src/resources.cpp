@@ -48,7 +48,7 @@ std::vector<char> ResourceLoader::load_data(const std::string &filename) const {
 			if (!infile.is_open())
 				throw StackException("Could not open resource package: " + _resource_definition.first);
 			infile.seekg(def->data_offset, std::ios::beg);
-			data.resize(def->data_size);
+			data.resize((size_t)def->data_size);
 			infile.read(data.data(), def->data_size);
 			infile.close();
 		}
