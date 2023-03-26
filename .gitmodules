@@ -1,6 +1,8 @@
 [submodule "dependencies/SDL"]
 	url = https://github.com/libsdl-org/SDL
 	path = dependencies/SDL
+	branch = 98ae54ccc098e3ae19f7a41aec8c43cbefb8e094
 [submodule "dependencies/SDL_image"]
 	path = dependencies/SDL_image
 	url = https://github.com/libsdl-org/SDL_image.git
+	branch = 26eba057cbd383d7476d3932908a96cf4328f893
