@@ -3,6 +3,7 @@
 #include "objects/objects.hpp"
 #include "game.hpp"
 #include "engine/math.hpp"
+#include <iostream>
 
 Object3D::Object3D(Game *game) : _game(game) {}
 
@@ -27,6 +28,14 @@ void Object3D::add_triangle(Triangle3 triangle) {
 }
 
 void Object3D::update() {}
+
+#define LOG_TIME_BEFORE \
+    auto start_time = std::chrono::high_resolution_clock::now();
+
+#define LOG_TIME_AFTER \
+    auto end_time = std::chrono::high_resolution_clock::now(); \
+    auto time_diff = std::chrono::duration_cast<std::chrono::microseconds>(end_time - start_time); \
+    std::cout << "Time taken: " << time_diff.count() << " microseconds" << std::endl;
 
 void Object3D::draw() {
     if (!this->_game)
@@ -66,9 +75,9 @@ void Object3D::draw() {
 	});
 
 	for (Triangle3& tri : projectedTriangles) {
-		for (auto& i: tri.v) {
-			i = math::point_to_screen((Vector3 &) i, projectionMatrix, screenSize);
-		}
+		std::transform(tri.v, tri.v + 3, tri.v, [&](Vector3& v) {
+			return math::point_to_screen(v, projectionMatrix, screenSize);
+		});
 		SDL_SetRenderDrawColor(renderer.lock().get(), 255, 255, 255, 255);
 		Vector3 centroid{};
 		for (auto normal : tri.normals)
