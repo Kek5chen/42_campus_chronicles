@@ -5,7 +5,7 @@ if(APPLE)
 else()
 	project(42CC LANGUAGES C CXX)
 endif()
-set (CMAKE_CXX_STANDARD 23)
+set (CMAKE_CXX_STANDARD 20)
 
 # Create an option to switch between a system sdl library and a vendored sdl library
 option(42CC_VENDORED "Use vendored libraries" ON)
