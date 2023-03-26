@@ -1,7 +1,6 @@
 #pragma once
 
-
-#include <exception>
+#include <stdexcept>
 #include <string>
 
 class StackException : public std::runtime_error {
