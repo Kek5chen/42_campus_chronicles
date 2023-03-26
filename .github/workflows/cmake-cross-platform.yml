@@ -23,6 +23,5 @@ jobs:
         git submodule update --recursive --remote
     - name: Build
       run: |
-        mkdir build && cd build
-        cmake ..
-        make
+        cmake -B build
+        cmake --build build
