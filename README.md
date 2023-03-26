@@ -1,3 +1,6 @@
+![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/kek5chen/42_campus_chronicles/master?style=flat-square)
+![Latest Version Tag](https://img.shields.io/github/v/tag/kek5chen/42_campus_chronicles?label=version&style=flat-square)
+![Lines of code](https://img.shields.io/tokei/lines/github/kek5chen/42_campus_chronicles?style=flat-square)
 # 42 Campus Chronicles - An MMORPG Adventure!
 Step into the world of the 42 Campus Chronicles, a pre-release MMORPG that promises to deliver thrilling gameplay experiences. Fight against challenging bosses and monsters, complete missions and quests, and team up with other players in a multiplayer RPG world, locally on the 42 premises. With its captivating gameplay, 42 Campus Chronicles is the perfect choice for gamers looking for an immersive adventure. Join us now and be part of the pre-release excitement! Any help is welcome to deliver this project!
 
