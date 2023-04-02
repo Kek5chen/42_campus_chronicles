@@ -60,6 +60,10 @@ int	main(int argc, char **argv)
 			printf("Error: Could not open input file %s\n", argv[i]);
 			return 1;
 		}
+		if (fileSize == 0) {
+			printf("Error: File %s is empty\n", argv[i]);
+			return 1;
+		}
 		append_to_outfile(outfile, fileSize, argv[i], infileData);
 		infileData.clear();
 		i++;
