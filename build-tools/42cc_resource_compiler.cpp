@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	int 				i;
 
 	if (argc < 3) {
-		printf("Usage: %s <infile> <resfile>\n", argv[0]);
+		printf("Usage: %s <infiles> <resfile>\n", argv[0]);
 		return 1;
 	}
 	std::ofstream	outfile(argv[argc - 1], std::ios::binary | std::ios_base::trunc);
