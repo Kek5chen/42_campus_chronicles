@@ -18,6 +18,8 @@ void ResourceLoader::load_resource_definitions(const std::string &package_filena
 	while (infile.good()) {
 		def = std::make_unique<ResourceDefinition>();
 		infile.read((char*)&def->data_size, 8);
+		if (def->data_size <= 0)
+			break;
 		infile.seekg(1, std::ios::cur);
 		std::getline(infile, def->path, '\0');
 		def->data_offset = ((long long) infile.tellg());
@@ -48,6 +50,8 @@ std::vector<char> ResourceLoader::load_data(const std::string &filename) const {
 			if (!infile.is_open())
 				throw StackException("Could not open resource package: " + _resource_definition.first);
 			infile.seekg(def->data_offset, std::ios::beg);
+			if (def->data_size <= 0)
+				break;
 			data.resize((size_t)def->data_size);
 			infile.read(data.data(), def->data_size);
 			infile.close();
