@@ -16,6 +16,8 @@ std::streamsize read_infile(const std::string& filename, std::vector<char> &data
 		return -1;
 	infile.seekg(0, std::ios::end);
 	size = infile.tellg();
+	if (size <= 0)
+		return size;
 	infile.seekg(0, std::ios::beg);
 	data.resize(size);
 	infile.read(data.data(), size);
