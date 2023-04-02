@@ -1,4 +1,4 @@
-![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/kek5chen/42_campus_chronicles/master?style=flat-square)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/fc979589fab342ad8611799e63a312a7)](https://app.codacy.com/gh/Kek5chen/42_campus_chronicles/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 ![Latest Version Tag](https://img.shields.io/github/v/tag/kek5chen/42_campus_chronicles?label=version&style=flat-square)
 ![Lines of code](https://img.shields.io/tokei/lines/github/kek5chen/42_campus_chronicles?style=flat-square)
 # 42 Campus Chronicles - An MMORPG Adventure!
@@ -40,13 +40,13 @@ If you have any questions or concerns about the GPL or its implications for your
 
 42 Campus Chronicles was created by the following developer:
 
-- [Kek5chen](https://github.com/Kek5chen)
+  - [Kek5chen](https://github.com/Kek5chen)
 
 ### Acknowledgments
 
 The following individuals have contributed to the development of 42 Campus Chronicles:
 
-- Michail Chatzipanagiotou, for providing motivation and support throughout the development process, and for working on the backend of the project.
+  - Michail Chatzipanagiotou, for providing motivation and support throughout the development process, and for working on the backend of the project.
 
 We would also like to acknowledge the contributions of the open source community and the creators of the libraries and tools that were used to develop this project. Without their hard work and dedication, this project would not have been possible.
 
@@ -62,9 +62,9 @@ We also encourage you to join the community of 42 Campus Chronicles users and co
 
 We are committed to improving and expanding 42 Campus Chronicles in the future. Here are some of the things we plan to work on:
 
-- Acquiring game sprites and assets to enhance the visual appeal and gameplay experience of the project.
-- Implementing additional game features and mechanics to make the project more engaging and immersive.
-- Incorporating user feedback and bug reports to improve the stability and performance of the game.
-- Working on optimization to make the game run smoother and improve its overall performance.
+  - Acquiring game sprites and assets to enhance the visual appeal and gameplay experience of the project.
+  - Implementing additional game features and mechanics to make the project more engaging and immersive.
+  - Incorporating user feedback and bug reports to improve the stability and performance of the game.
+  - Working on optimization to make the game run smoother and improve its overall performance.
 
 Stay tuned for more updates and improvements as we continue to develop and refine 42 Campus Chronicles. We welcome your suggestions and feedback on how we can make this project even better!
