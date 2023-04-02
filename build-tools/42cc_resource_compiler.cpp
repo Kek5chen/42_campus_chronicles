@@ -58,11 +58,11 @@ int	main(int argc, char **argv)
 		fileSize = read_infile(argv[i], infileData);
 		if (fileSize < 0) {
 			printf("Error: Could not open input file %s\n", argv[i]);
-			return 1;
+			continue;
 		}
 		if (fileSize == 0) {
 			printf("Error: File %s is empty\n", argv[i]);
-			return 1;
+			continue;
 		}
 		append_to_outfile(outfile, fileSize, argv[i], infileData);
 		infileData.clear();
