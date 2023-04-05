@@ -32,8 +32,7 @@ void ResourceLoader::load_resource_definitions(const std::string &package_filena
 
 void ResourceLoader::unload_resource_definitions(const std::string &package_filename)
 {
-	if (_resource_definitions.find(package_filename) != _resource_definitions.end())
-		_resource_definitions.erase(package_filename);
+	_resource_definitions.erase(package_filename);
 }
 
 std::vector<char> ResourceLoader::load_data(const std::string &filename) const {
