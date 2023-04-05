@@ -1,94 +1,60 @@
 #pragma once
 
-struct Vector2;
-struct Vector3;
-struct Vector4;
-struct Matrix4;
+#include <initializer_list>
+#include <type_traits>
 
-struct Vector2 {
-	Vector2() = default;
-	Vector2(float x, float y);
-	Vector2(Vector3 vec3);
-	Vector2(Vector4 vec4);
+template <int V>
+struct Vector {
+	Vector();
+	Vector(std::initializer_list<float> list);
+	template<int V2>
+	Vector(const Vector<V2>& other);
+	Vector(const Vector<V-1>& other, float value);
 
-	Vector2 		operator+(const Vector2& other) const;
-	Vector2 		operator-(const Vector2& other) const;
-	Vector2 		operator*(const Vector2& other) const;
-	Vector2 		operator/(const Vector2& other) const;
-    Vector2         operator*(float scalar) const;
-    Vector2         operator/(float scalar) const;
+	template <int V2>
+	Vector<V> 		operator+(const Vector<V2>& other) const;
+	template <int V2>
+	Vector<V> 		operator-(const Vector<V2>& other) const;
+	template <int V2>
+	Vector<V> 		operator*(const Vector<V2>& other) const;
+	template <int V2>
+	Vector<V> 		operator/(const Vector<V2>& other) const;
+	Vector<V>		operator+(float value) const;
+	Vector<V>		operator-(float value) const;
+    Vector<V>		operator*(float scalar) const;
+    Vector<V>		operator/(float scalar) const;
 	float&			operator[](int index);
 	const float&	operator[](int index) const;
-    void            operator+=(const Vector2& other);
-    void            operator-=(const Vector2& other);
-    void            operator*=(const Vector2& other);
-    void            operator/=(const Vector2& other);
+	template <int V2>
+    void            operator+=(const Vector<V2>& other);
+	template <int V2>
+    void            operator-=(const Vector<V2>& other);
+	template <int V2>
+    void            operator*=(const Vector<V2>& other);
+	template <int V2>
+    void            operator/=(const Vector<V2>& other);
     void            operator*=(float scalar);
     void            operator/=(float scalar);
 
-	float	magnitude() const;
-	Vector2	normalize() const;
-	float	distance(const Vector2 &other) const;
+	[[nodiscard]] float		sum() const;
+	[[nodiscard]] float		magnitude() const;
+	[[nodiscard]] Vector	normalize() const;
+	[[nodiscard]] float		distance(const Vector &other) const;
 
-	float x = 0, y = 0;
+	union {
+		float data[V] {0};
+		struct {
+			float x;
+			std::enable_if_t<V >= 2, float> y;
+			std::enable_if_t<V >= 2, float> z;
+			std::enable_if_t<V >= 2, float> w;
+		};
+	};
 };
 
-struct Vector3 {
-	Vector3() = default;
-	Vector3(float x, float y, float z);
-    Vector3(Vector2 vec2, float z);
-	Vector3(Vector2 vec2);
-	Vector3(Vector4 vec4);
-
-	Vector3 		operator+(const Vector3& other) const;
-	Vector3 		operator-(const Vector3& other) const;
-	Vector3 		operator*(const Vector3& other) const;
-	Vector3 		operator/(const Vector3& other) const;
-    Vector3         operator*(float scalar) const;
-    Vector3         operator/(float scalar) const;
-	float&			operator[](int index);
-	const float&	operator[](int index) const;
-    void            operator+=(const Vector3& other);
-    void            operator-=(const Vector3& other);
-    void            operator*=(const Vector3& other);
-    void            operator/=(const Vector3& other);
-    void            operator*=(float scalar);
-    void            operator/=(float scalar);
-	Vector3			operator-() const;
-
-    float           magnitude() const;
-    Vector3         normalize() const;
-	float 			distance(const Vector3& other) const;
-
-	float x = 0, y = 0, z = 0;
-};
-
-struct Vector4 {
-	Vector4() = default;
-    Vector4(float x, float y, float z, float w);
-    Vector4(Vector3 vec3, float w);
-	Vector4(Vector2 vec2);
-	Vector4(Vector3 vec3);
-
-	Vector4 		operator+(const Vector4& other) const;
-	Vector4 		operator-(const Vector4& other) const;
-	Vector4 		operator*(const Vector4& other) const;
-	Vector4 		operator/(const Vector4& other) const;
-    Vector4         operator*(float scalar) const;
-    Vector4         operator/(float scalar) const;
-	float&			operator[](int index);
-	const float&	operator[](int index) const;
-    void            operator+=(const Vector4& other);
-    void            operator-=(const Vector4& other);
-    void            operator*=(const Vector4& other);
-    void            operator/=(const Vector4& other);
-    void            operator*=(float scalar);
-    void            operator/=(float scalar);
-	Vector4			operator-() const;
-	Vector4 		operator*(const Matrix4& other) const;
-
-	float x = 0, y = 0, z = 0, w = 0;
-};
+using Vector2 = Vector<2>;
+using Vector3 = Vector<3>;
+using Vector4 = Vector<4>;
 
 struct Matrix4 {
     Matrix4();
@@ -118,3 +84,5 @@ struct Triangle3 {
 	Vector3	v[3];
 	Vector3 normals[3] {};
 };
+
+#include "base_objects_impl.inl"
