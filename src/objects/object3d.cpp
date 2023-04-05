@@ -54,7 +54,7 @@ void Object3D::draw() {
 		for (auto& i: projectedTriangle.v) {
 			Vector4 transformedVertex = modelMatrix * Vector4(i, 1.0f);
 			transformedVertex = modelTranslationMatrix * transformedVertex;
-			i = transformedVertex;
+			i = (Vector3)transformedVertex;
 		}
 		projectedTriangle.normals[0] = tri.normals[0];
 		projectedTriangle.normals[1] = tri.normals[1];

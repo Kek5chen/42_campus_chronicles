@@ -8,7 +8,7 @@ struct Vector {
 	Vector();
 	Vector(std::initializer_list<float> list);
 	template<int V2>
-	Vector(const Vector<V2>& other);
+	explicit Vector(const Vector<V2>& other);
 	Vector(const Vector<V-1>& other, float value);
 
 	template <int V2>
