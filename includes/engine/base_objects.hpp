@@ -3,58 +3,59 @@
 #include <initializer_list>
 #include <type_traits>
 
-template <int V>
+template <typename T, int V>
+requires std::is_arithmetic_v<T>
 struct Vector {
 	Vector();
-	Vector(std::initializer_list<float> list);
+	Vector(std::initializer_list<T> list);
 	template<int V2>
-	explicit Vector(const Vector<V2>& other);
-	Vector(const Vector<V-1>& other, float value);
+	explicit Vector(const Vector<T, V2>& other);
+	Vector(const Vector<T, V-1>& other, T value);
 
 	template <int V2>
-	Vector<V> 		operator+(const Vector<V2>& other) const;
+	Vector<T, V> 		operator+(const Vector<T, V2>& other) const;
 	template <int V2>
-	Vector<V> 		operator-(const Vector<V2>& other) const;
+	Vector<T, V> 		operator-(const Vector<T, V2>& other) const;
 	template <int V2>
-	Vector<V> 		operator*(const Vector<V2>& other) const;
+	Vector<T, V> 		operator*(const Vector<T, V2>& other) const;
 	template <int V2>
-	Vector<V> 		operator/(const Vector<V2>& other) const;
-	Vector<V>		operator+(float value) const;
-	Vector<V>		operator-(float value) const;
-    Vector<V>		operator*(float scalar) const;
-    Vector<V>		operator/(float scalar) const;
-	float&			operator[](int index);
-	const float&	operator[](int index) const;
+	Vector<T, V> 		operator/(const Vector<T, V2>& other) const;
+	Vector<T, V>		operator+(T value) const;
+	Vector<T, V>		operator-(T value) const;
+    Vector<T, V>		operator*(T scalar) const;
+    Vector<T, V>		operator/(T scalar) const;
+	T&			operator[](int index);
+	const T&	operator[](int index) const;
 	template <int V2>
-    void            operator+=(const Vector<V2>& other);
+    void            operator+=(const Vector<T, V2>& other);
 	template <int V2>
-    void            operator-=(const Vector<V2>& other);
+    void            operator-=(const Vector<T, V2>& other);
 	template <int V2>
-    void            operator*=(const Vector<V2>& other);
+    void            operator*=(const Vector<T, V2>& other);
 	template <int V2>
-    void            operator/=(const Vector<V2>& other);
-    void            operator*=(float scalar);
-    void            operator/=(float scalar);
+    void            operator/=(const Vector<T, V2>& other);
+    void            operator*=(T scalar);
+    void            operator/=(T scalar);
 
-	[[nodiscard]] float		sum() const;
-	[[nodiscard]] float		magnitude() const;
+	[[nodiscard]] T			sum() const;
+	[[nodiscard]] T			magnitude() const;
 	[[nodiscard]] Vector	normalize() const;
-	[[nodiscard]] float		distance(const Vector &other) const;
+	[[nodiscard]] T			distance(const Vector &other) const;
 
 	union {
-		float data[V] {0};
+		T data[V] {0};
 		struct {
-			float x;
-			std::enable_if_t<V >= 2, float> y;
-			std::enable_if_t<V >= 2, float> z;
-			std::enable_if_t<V >= 2, float> w;
+			T x;
+			std::enable_if_t<V >= 2, T> y;
+			std::enable_if_t<V >= 2, T> z;
+			std::enable_if_t<V >= 2, T> w;
 		};
 	};
 };
 
-using Vector2 = Vector<2>;
-using Vector3 = Vector<3>;
-using Vector4 = Vector<4>;
+using Vector2 = Vector<float, 2>;
+using Vector3 = Vector<float, 3>;
+using Vector4 = Vector<float, 4>;
 
 struct Matrix4 {
     Matrix4();
