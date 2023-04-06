@@ -47,8 +47,8 @@ struct Vector {
 		struct {
 			T x;
 			std::enable_if_t<V >= 2, T> y;
-			std::enable_if_t<V >= 2, T> z;
-			std::enable_if_t<V >= 2, T> w;
+			std::enable_if_t<V >= 3, T> z;
+			std::enable_if_t<V >= 4, T> w;
 		};
 	};
 };
