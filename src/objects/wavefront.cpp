@@ -27,7 +27,7 @@ static Vector3 parse_vertex(const std::string_view &line) {
 	Vector3 vertex;
 	auto start = line.data() + 2;  // Skip the "v " at the beginning
 
-	for (float* coord : {&vertex.x, &vertex.y, &vertex.z}) {
+	for (auto* coord : {&vertex.x, &vertex.y, &vertex.z}) {
 		start = std::find_if_not(start, line.data() + line.size(), [](unsigned char c) { return std::isspace(c); });
 		auto [ptr, err] = std::from_chars(start, line.data() + line.size(), *coord);
 		if (err != std::errc{}) {
@@ -42,7 +42,7 @@ static Vector3 parse_normal(const std::string_view &line) {
 	Vector3 normal;
 	auto start = line.data() + 3;  // Skip the "vn " at the beginning
 
-	for (float* coord : {&normal.x, &normal.y, &normal.z}) {
+	for (auto* coord : {&normal.x, &normal.y, &normal.z}) {
 		start = std::find_if_not(start, line.data() + line.size(), [](unsigned char c) { return std::isspace(c); });
 		auto [ptr, err] = std::from_chars(start, line.data() + line.size(), *coord);
 		if (err != std::errc{}) {
