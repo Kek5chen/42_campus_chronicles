@@ -1,5 +1,7 @@
 #include <algorithm>
-#include <execution>
+#include <chrono>
+#include <iostream>
+#include <thread>
 #include "objects/objects.hpp"
 #include "game.hpp"
 #include "engine/math.hpp"
@@ -28,6 +30,39 @@ void Object3D::add_triangle(Triangle3 triangle) {
 
 void Object3D::update() {}
 
+static std::vector<Triangle3> project_triangles_par(const std::vector<Triangle3>& triangles, const Matrix4& modelMatrix,
+													const Matrix4& modelTranslationMatrix) {
+	std::vector<Triangle3> projectedTriangles(triangles.size());
+	const size_t numThreads = std::thread::hardware_concurrency();
+	std::vector<std::thread> threads(numThreads);
+	const int chunkSize = (triangles.size() + numThreads - 1) / numThreads;
+
+	for (int i = 0; i < numThreads; ++i) {
+		const int startIdx = i * chunkSize;
+		const int endIdx = std::min(startIdx + chunkSize, static_cast<int>(triangles.size()));
+
+		threads[i] = std::thread([&] (const int threadStartIdx, const int threadEndIdx) {
+			for (int j = threadStartIdx; j < threadEndIdx; ++j) {
+				Triangle3 projectedTriangle = triangles[j];
+				for (auto& i: projectedTriangle.v) {
+					Vector4 transformedVertex = modelMatrix * Vector4(i, 1.0f);
+					transformedVertex = modelTranslationMatrix * transformedVertex;
+					i = (Vector3)transformedVertex;
+				}
+				projectedTriangle.normals[0] = triangles[j].normals[0];
+				projectedTriangle.normals[1] = triangles[j].normals[1];
+				projectedTriangle.normals[2] = triangles[j].normals[2];
+				projectedTriangles[j] = projectedTriangle;
+			}
+		}, startIdx, endIdx);
+	}
+
+	for (auto& thread : threads) {
+		thread.join();
+	}
+	return projectedTriangles;
+}
+
 void Object3D::draw() {
     if (!this->_game)
         return;
@@ -48,20 +83,10 @@ void Object3D::draw() {
 	modelTranslationMatrix = math::translate(modelTranslationMatrix, this->_game->camera.pos);
     Matrix4 projectionMatrix = math::perspective(fov, aspect, near, far);
 
-	std::vector<Triangle3> projectedTriangles(_triangles.size());
-	std::transform(std::execution::par, _triangles.begin(), _triangles.end(), projectedTriangles.begin(), [&](Triangle3& tri) {
-		Triangle3 projectedTriangle = tri;
-		for (auto& i: projectedTriangle.v) {
-			Vector4 transformedVertex = modelMatrix * Vector4(i, 1.0f);
-			transformedVertex = modelTranslationMatrix * transformedVertex;
-			i = (Vector3)transformedVertex;
-		}
-		projectedTriangle.normals[0] = tri.normals[0];
-		projectedTriangle.normals[1] = tri.normals[1];
-		projectedTriangle.normals[2] = tri.normals[2];
-		return projectedTriangle;
-	});
-	std::sort(std::execution::seq, projectedTriangles.begin(), projectedTriangles.end(), [](const Triangle3& a, const Triangle3& b) {
+	std::vector<Triangle3> projectedTriangles = project_triangles_par(this->_triangles, modelMatrix,
+																	  modelTranslationMatrix);
+
+	std::sort(projectedTriangles.begin(), projectedTriangles.end(), [](const Triangle3& a, const Triangle3& b) {
 		return a.v->z < b.v->z;
 	});
 
