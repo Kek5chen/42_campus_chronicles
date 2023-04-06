@@ -55,9 +55,5 @@ include_directories(dependencies/SDL_image/include)
 target_link_libraries(42CC PRIVATE SDL3::SDL3-static)
 target_link_libraries(42CC PRIVATE SDL3_image)
 
-if(LINUX)
-	target_link_libraries(42CC PRIVATE tbb)
-endif()
-
 # Add include directories for the includes folder
 target_include_directories(42CC PRIVATE includes)
