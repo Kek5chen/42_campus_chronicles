@@ -1,6 +1,6 @@
 
 #include <algorithm>
-#include <charconv>
+#include <string>
 #include "objects/wavefront.hpp"
 #include "engine/exceptions/stackexception.hpp"
 
@@ -29,11 +29,17 @@ static Vector3 parse_vertex(const std::string_view &line) {
 
 	for (auto* coord : {&vertex.x, &vertex.y, &vertex.z}) {
 		start = std::find_if_not(start, line.data() + line.size(), [](unsigned char c) { return std::isspace(c); });
-		auto [ptr, err] = std::from_chars(start, line.data() + line.size(), *coord);
-		if (err != std::errc{}) {
+		auto end = std::find_if(start, line.data() + line.size(), [](unsigned char c) { return std::isspace(c); });
+		if (start == end)
+			throw StackException("Failed to parse vertex");
+		std::string coord_str(start, end);
+		try {
+			*coord = std::stof(coord_str);
+		}
+		catch (const std::invalid_argument&) {
 			throw StackException("Failed to parse vertex");
 		}
-		start = ptr;
+		start = end;
 	}
 	return vertex;
 }
@@ -44,11 +50,18 @@ static Vector3 parse_normal(const std::string_view &line) {
 
 	for (auto* coord : {&normal.x, &normal.y, &normal.z}) {
 		start = std::find_if_not(start, line.data() + line.size(), [](unsigned char c) { return std::isspace(c); });
-		auto [ptr, err] = std::from_chars(start, line.data() + line.size(), *coord);
-		if (err != std::errc{}) {
-			throw StackException("Failed to parse vertex");
+		auto end = std::find_if(start, line.data() + line.size(), [](unsigned char c) { return std::isspace(c); });
+		if (start == end) {
+			throw StackException("Failed to parse normal");
 		}
-		start = ptr;
+		std::string coord_str(start, end);
+		try {
+			*coord = std::stof(coord_str);
+		}
+		catch (const std::invalid_argument&) {
+			throw StackException("Failed to parse normal");
+		}
+		start = end;
 	}
 	return normal;
 }
@@ -64,7 +77,6 @@ static std::vector<std::string_view> parse_tokens(const std::string_view &line) 
 		tokens.emplace_back(line.substr(pos, end - pos));
 		pos = end + 1;
 	}
-
 	return tokens;
 }
 
