@@ -47,8 +47,8 @@ struct Vector {
 		struct {
 			T x;
 			std::enable_if_t<V >= 2, T> y;
-			std::enable_if_t<V >= 3, T> z;
-			std::enable_if_t<V >= 4, T> w;
+			std::enable_if_t<V >= 2, T> z; // TODO: Reimplement these x,y,z better so that a Vector2 doesn't have a z and w component. enable_if is really weird.
+			std::enable_if_t<V >= 2, T> w;
 		};
 	};
 };
