@@ -24,18 +24,18 @@ struct Vector {
 	Vector<T, V>		operator-(T value) const;
     Vector<T, V>		operator*(T scalar) const;
     Vector<T, V>		operator/(T scalar) const;
-	T&			operator[](int index);
-	const T&	operator[](int index) const;
+	T&					operator[](int index);
+	const T&			operator[](int index) const;
 	template <int V2>
-    void            operator+=(const Vector<T, V2>& other);
+    void				operator+=(const Vector<T, V2>& other);
 	template <int V2>
-    void            operator-=(const Vector<T, V2>& other);
+    void				operator-=(const Vector<T, V2>& other);
 	template <int V2>
-    void            operator*=(const Vector<T, V2>& other);
+    void				operator*=(const Vector<T, V2>& other);
 	template <int V2>
-    void            operator/=(const Vector<T, V2>& other);
-    void            operator*=(T scalar);
-    void            operator/=(T scalar);
+    void				operator/=(const Vector<T, V2>& other);
+    void				operator*=(T scalar);
+    void				operator/=(T scalar);
 
 	[[nodiscard]] T			sum() const;
 	[[nodiscard]] T			magnitude() const;
