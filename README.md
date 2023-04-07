@@ -1,6 +1,10 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/fc979589fab342ad8611799e63a312a7)](https://app.codacy.com/gh/Kek5chen/42_campus_chronicles/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 ![Latest Version Tag](https://img.shields.io/github/v/tag/kek5chen/42_campus_chronicles?label=version&style=flat-square)
-![Lines of code](https://img.shields.io/tokei/lines/github/kek5chen/42_campus_chronicles?style=flat-square)
+![Lines of code](https://img.shields.io/tokei/lines/github/kek5chen/42_campus_chronicles?style=flat-square)\
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Kek5chen/42_campus_chronicles/cmake-linux-platform.yml?label=Linux%20Build&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Kek5chen/42_campus_chronicles/cmake-win-platform.yml?label=Windows%20Build&style=flat-square)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/Kek5chen/42_campus_chronicles/cmake-osx-platform.yml?label=OSX%20Build&style=flat-square)
+
 # 42 Campus Chronicles - An MMORPG Adventure!
 Step into the world of the 42 Campus Chronicles, a pre-release MMORPG that promises to deliver thrilling gameplay experiences. Fight against challenging bosses and monsters, complete missions and quests, and team up with other players in a multiplayer RPG world, locally on the 42 premises. With its captivating gameplay, 42 Campus Chronicles is the perfect choice for gamers looking for an immersive adventure. Join us now and be part of the pre-release excitement! Any help is welcome to deliver this project!
 
