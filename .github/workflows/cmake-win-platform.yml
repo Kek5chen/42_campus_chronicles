@@ -1,0 +1,34 @@
+name: CMake Build Windows
+
+on:
+  create:
+    tags:
+      - '*'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Pull & update submodules recursively
+      run: |
+        git submodule update --init --recursive
+    - name: Build
+      run: |
+        cmake -B build
+        cmake --build build
+    - name: Rename File (Linux)
+      run: mv build/42CC build/42CC-win
+    - name: Create Release
+      uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true
+        artifactErrorsFailBuild: false
+        artifacts: "build/42CC-win,build/resources.42CC"
+        draft: false
+        makeLatest: true
+        prerelease: true
+        replacesArtifacts: false
+        skipIfReleaseExists: false
